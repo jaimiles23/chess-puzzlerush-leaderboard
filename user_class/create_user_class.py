@@ -312,13 +312,17 @@ class User(UserConstants):
 
     ########## Puzzle Rush
     def get_user_puzzlerush_stats(self) -> list:
-        """Returns dict with stats for puzzle rush."""
+        """Returns dict with stats for puzzle rush.
+        
+        TODO:
+        - Currently returning list? Only structur difference is modes_puzzle_rush is single value. 
+        - Investigate why & remove 0 index reference.
+        """
         return User.get_mode_stats(
             self.user_stats_dict,
             User.modes_puzzle_rush,
             User.keys_puzzlerush
-    
-        )
+        )[0]
 
     
     ########## View player profile
@@ -354,7 +358,7 @@ def test_user_class(jai):
 
     jai.view_profile()
     for v in vars(jai):
-        print(v.__name__)
+        print(v)
     
 
 def main():
