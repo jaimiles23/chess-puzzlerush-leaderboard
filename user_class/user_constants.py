@@ -23,7 +23,7 @@
 
 class UserConstants(object):
     """
-    Parent class that contains cosntants for:
+    Parent class that contains constants for:
         - Activity modes
         - Dictionary data structures
 
@@ -50,10 +50,10 @@ class UserConstants(object):
         "puzzle_rush",
     )
 
+
     ##########
     # Data structures
     ##########
-    
     """
     Tuple data structures holding dict keys to acccess user info from chess.com API.
 
