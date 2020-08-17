@@ -8,18 +8,22 @@
 
    NOTE:
    requests isn't returning the full html and urllib is blocked.
-   try to use selenium: https://automatetheboringstuff.com/chapter11/
+   try to use selenium: 
+   https://automatetheboringstuff.com/chapter11/
+   https://selenium-python.readthedocs.io/installation.html
 
    Can also try to DOWNLOAD the webpage in html?? see if format is different?
    Or save the webpage as a pdf, and then use pdf identifier??
 
+   TODO: 
+   
+    Move to remote-webdriver so doesn't have to run from desktop
+    https://selenium-python.readthedocs.io/getting-started.html#selenium-remote-webdriver
 
-   Otherwise: 
-   https://selenium-python.readthedocs.io/installation.html
-
-
-  https://selenium-python.readthedocs.io/getting-started.html#selenium-remote-webdriver
-  ### For the REMOTE webdriver -- I should migrate to this later.
+    Try using requests-html instead
+    https://requests.readthedocs.io/projects/requests-html/en/latest/#javascript-support
+ 
+    If both methods work - use timeit and compare practicality.
  ]
  */
 """
