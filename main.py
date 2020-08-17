@@ -2,7 +2,7 @@
  * @author [Jai Miles]
  * @email [jaimiles23@gmail.com]
  * @create date 2020-08-16 13:47:49
- * @modify date 2020-08-16 14:04:53
+ * @modify date 2020-08-16 17:39:30
  * @desc [
     Main script to find chess.com ratings for user profiles.
 
@@ -52,6 +52,8 @@ def main():
     for i in range(len(user_profiles)):
         print(i + 1, '\t', end = "")
         user_profiles[i].view_profile()
+
+    ## Save user information
 
  
 
