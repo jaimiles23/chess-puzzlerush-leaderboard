@@ -30,9 +30,8 @@ import requests
 
 
 ##########
-# Player object
+# User object
 ##########
-
 
 class User(object):
 
