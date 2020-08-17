@@ -86,7 +86,7 @@ class UserSaver(UserConstants):
     # base_classes = Union[str, int, float]
 
     @staticmethod
-    def get_csv_headers( User: object) -> list:
+    def get_csv_headers( user_obj: object) -> list:
         """Returns list of variables for csv headers.
         
         Uses recursive function to get csv headers.
@@ -98,7 +98,7 @@ class UserSaver(UserConstants):
             
             If there are nested dictionaries, creates prefixes of nested keys
             """
-            if not isinstance(user_var, dict):
+            if not isinstance( var, dict):
                 raise TypeError
 
             keys = []
@@ -121,11 +121,19 @@ class UserSaver(UserConstants):
         ## Get csv headers
         csv_headers = list()
 
-        for var in vars(User):
-            if isinstance(var, (str, int, float)):
+        for v in vars(user_obj):
+
+            print(v, end = ' - ')
+            var = getattr(user_obj, v)
+            print(type(var))
+            print(var)
+
+            if isinstance( var, (str, int, float)):
+                print('base')
                 csv_headers.append(var)
 
-            elif isinstance(var, dict):
+            elif isinstance( var, dict):
+                print('dict')
                 csv_headers += add_nested_keys(var)
 
             else:
