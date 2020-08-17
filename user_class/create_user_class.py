@@ -350,9 +350,8 @@ def main():
 
     jai.view_profile()
     print( vars(jai))
-
-
     
 
 if __name__ == "__main__":
     main()
+
