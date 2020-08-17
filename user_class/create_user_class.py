@@ -10,6 +10,8 @@
     I process the chess.com API data itno a standardized form within each user profile.
     I select data that I may find relevant/interesting to analysis and standardize
     timestamps into str-datetime format.
+
+    https://stackoverflow.com/questions/44813122/writing-list-of-objects-to-csv-file
  ]
  */
 """
@@ -23,8 +25,10 @@ import time
 
 
 import bs4
+import csv
 from datetime import datetime
 import json
+import pandas as pd
 import requests
 # from typing import Union
 
@@ -147,6 +151,9 @@ class User(UserConstants):
     @staticmethod
     def get_nested_stats(top_dict: dict, key_tuple: tuple) -> dict:
         """Returns values from top_dict that are specified in the key_tuple.
+
+        NOTE: recursive function may be more flexible. 
+        Can also implement with while iterator loop.
         """
         stats_dict = dict()
 
@@ -327,8 +334,6 @@ class User(UserConstants):
         print(items, sep = "\t")
 
 
-
-
 ##########
 # Main
 ##########
@@ -344,6 +349,9 @@ def main():
         print("", k, "-" * 5, v, sep = "\n" * 1)
 
     jai.view_profile()
+    print( vars(jai))
+
+
     
 
 if __name__ == "__main__":
