@@ -9,25 +9,31 @@
  */
 """
 
+
 ##########
 # Imports
 ##########
 
 from user_class.create_user_class import User
-
+from user_class.user_constants import UserConstants
 
 
 ##########
 # UserSaver class
 ##########
 
-class UserSaver(object):
+class UserSaver(UserConstants):
    """
    Class with auxiliary methods to save user profile
-
-   NOTE: can inherit from the same class so that the constants 
-   can be used twice??? maybe?
    """
+
+   @staticmethod
+   def get_user_attr_for_csv( User: object) -> list:
+      """Returns list of user object attributes for csv format.
+      """
+      
+
+
 
 
 
