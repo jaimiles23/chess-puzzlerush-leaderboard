@@ -70,7 +70,7 @@ class User(UserConstants):
     def print_num_users(cls):
         """Prints number of users."""
         print(cls.user_count)
-
+    
 
     ##########
     # Static Methods
@@ -143,7 +143,7 @@ class User(UserConstants):
             return value[-2:]        
 
 
-    ########## Dictionay access
+    ########## Dictionary access
     @staticmethod
     def get_nested_stats(top_dict: dict, key_tuple: tuple) -> dict:
         """Returns values from top_dict that are specified in the key_tuple.
@@ -344,7 +344,6 @@ def main():
         print("", k, "-" * 5, v, sep = "\n" * 1)
 
     jai.view_profile()
-    
     
 
 if __name__ == "__main__":
