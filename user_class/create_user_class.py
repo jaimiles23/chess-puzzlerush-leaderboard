@@ -338,11 +338,15 @@ class User(UserConstants):
 # Main
 ##########
 
-def main():
+def instantiate_user():
     username = "jaimiles23"
     score = 23
 
     jai = User(username, score)
+    return jai
+
+
+def test_user_class(jai):
 
     print("\n\n", "#" * 10, "Player Variables", "#" * 10, "\n\n")
     for k, v in vars(jai).items():
@@ -352,6 +356,11 @@ def main():
     for v in vars(jai):
         print(v.__name__)
     
+
+def main():
+    jai = instantiate_user()
+    test_user_class(jai)
+
 
 if __name__ == "__main__":
     main()
