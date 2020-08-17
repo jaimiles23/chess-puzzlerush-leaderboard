@@ -10,6 +10,7 @@
  */
 """
 
+
 ##########
 # Imports
 ##########
@@ -23,18 +24,18 @@
 class UserConstants(object):
     """
     Parent class that contains cosntants for:
-    - activity modes
-    - dictionary data structures
+        - Activity modes
+        - Dictionary data structures
+
+    NOTE: Careful consideration of tuple data structure 
+    Even if single item, must still have comma after so 
+    script considers the structure iterable 
     """
 
     ##########
     # Modes
     ##########
 
-    timestamps_to_datetimes = (
-        'joined',
-        'date',
-    )
     modes_play = (
         "chess_blitz",
         "chess_bullet",
@@ -104,4 +105,5 @@ class UserConstants(object):
     Puzzle rush daily stats are not available if user has not yet played today.
     Because users are scraped from puzzlerush scoreboard, this should not present an issue.
     """
+
 
