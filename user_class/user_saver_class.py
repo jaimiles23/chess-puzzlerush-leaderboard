@@ -66,8 +66,10 @@ class UserSaver(UserConstants):
 
     @staticmethod
     def get_csv_file_name() -> str:
-        """Returns name for csv file."""
-
+        """Returns name for csv file.
+        
+        NOTE: need to format digits HH, MM, SS
+        """
         now_obj = datetime.now()
         
         return UserSaver.csv_file_name.format(
@@ -106,8 +108,8 @@ class UserSaver(UserConstants):
                     # if value, add key.
                     keys.append(k)
                 
-                elif isinstance(k, dict):
-                    nested_keys = add_nested_keys(k)
+                elif isinstance(v, dict):
+                    nested_keys = add_nested_keys(v)
                     prefixed_keys = ['_'.join([k, key]) for key in nested_keys]
                     keys += prefixed_keys
                 
@@ -182,8 +184,14 @@ class UserSaver(UserConstants):
 # Main
 ##########
 
+def test_csv_name():
+    """Unit tests for creating csv name"""
+    file_name = UserSaver.get_csv_file_name()
+    print(file_name)
+
+
 def main():
-    pass
+    test_csv_name()
 
 
 if __name__ == "__main__":
