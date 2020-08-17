@@ -349,7 +349,8 @@ def main():
         print("", k, "-" * 5, v, sep = "\n" * 1)
 
     jai.view_profile()
-    print( vars(jai))
+    for v in vars(jai):
+        print(v.__name__)
     
 
 if __name__ == "__main__":
