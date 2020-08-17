@@ -35,7 +35,9 @@ class UserSaver(UserConstants):
       """
       user_attr = list()
 
-      user_attr += UserSaver.get_user_info(User) 
+      user_attr += UserSaver.get_user_info(User)
+
+      ## insert @ index1&2, username & score
 
 
 
