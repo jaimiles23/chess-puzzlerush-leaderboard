@@ -23,7 +23,10 @@ from user_class.create_user_class import User
 
 class UserSaver(object):
    """
-   Class with auxiliary methods to save user profiles.
+   Class with auxiliary methods to save user profile
+
+   NOTE: can inherit from the same class so that the constants 
+   can be used twice??? maybe?
    """
 
 

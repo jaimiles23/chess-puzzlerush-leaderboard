@@ -29,11 +29,14 @@ import requests
 # from typing import Union
 
 
+from user_class.user_constants import UserConstants
+
+
 ##########
 # User object
 ##########
 
-class User(object):
+class User(UserConstants):
 
     ##########
     # Class 
@@ -52,71 +55,71 @@ class User(object):
         'joined',
         'date',
     )
-    modes_play = (
-        "chess_blitz",
-        "chess_bullet",
-        "chess_daily",
-        "chess_rapid",
-    )
-    modes_practice = (
-        "tactics",
-        "lessons",
-    )
-    modes_puzzle_rush = (
-        "puzzle_rush",
-    )
+    # modes_play = (
+    #     "chess_blitz",
+    #     "chess_bullet",
+    #     "chess_daily",
+    #     "chess_rapid",
+    # )
+    # modes_practice = (
+    #     "tactics",
+    #     "lessons",
+    # )
+    # modes_puzzle_rush = (
+    #     "puzzle_rush",
+    # )
 
-    ########## Data structures
-    """
-    Tuple data structures holding dict keys to acccess user info from chess.com API.
+    # ########## Data structures
+    # """
+    # Tuple data structures holding dict keys to acccess user info from chess.com API.
 
-    keys_info:
-        - account info
-    keys_games:
-        - chess_blitz
-        - chess_bullet
-        - chess_daily
-        - chess_rapid
-    keys_practice:
-        - tactics
-        - lessons
-    keys_puzzlerush:
-        - puzzle rush
-    keys_daily:
-        - daily puzzles
-    """
+    # keys_info:
+    #     - account info
+    # keys_games:
+    #     - chess_blitz
+    #     - chess_bullet
+    #     - chess_daily
+    #     - chess_rapid
+    # keys_practice:
+    #     - tactics
+    #     - lessons
+    # keys_puzzlerush:
+    #     - puzzle rush
+    # keys_daily:
+    #     - daily puzzles
+    # """
 
-    keys_info = (
-        'player_id',
-        'username', 
-        'country',
-        'location', 
-        'joined',
-        'status',
-        "is_streamer",
-    )
-    keys_games = (
-        ( "last", 
-            ("rating", "date")),
-        ("best", 
-            ("rating", "date")),
-        ("record",
-            ("win", "loss", "draw"))
-    )
-    keys_practice = (
-        ("highest", 
-            ("rating", "date")),
-    )
-    keys_puzzlerush = (
-        ("best",
-            ("total_attempts", "score")),
-        ("daily", 
-            ("total_attempts", "score"))
-    )
-    """
-    NOTE
-    Puzzle rush daily stats are not available if user has not yet played today.
-    Because users are scraped from puzzlerush scoreboard, this should not present an issue.
+    # keys_info = (
+    #     'player_id',
+    #     'username', 
+    #     'country',
+    #     'location', 
+    #     'joined',
+    #     'status',
+    #     "is_streamer",
+    # )
+    # keys_games = (
+    #     ( "last", 
+    #         ("rating", "date")),
+    #     ("best", 
+    #         ("rating", "date")),
+    #     ("record",
+    #         ("win", "loss", "draw"))
+    # )
+    # keys_practice = (
+    #     ("highest", 
+    #         ("rating", "date")),
+    # )
+    # keys_puzzlerush = (
+    #     ("best",
+    #         ("total_attempts", "score")),
+    #     ("daily", 
+    #         ("total_attempts", "score"))
+    # )
+    # """
+    # NOTE
+    # Puzzle rush daily stats are not available if user has not yet played today.
+    # Because users are scraped from puzzlerush scoreboard, this should not present an issue.
     """
 
 
@@ -126,6 +129,12 @@ class User(object):
     def add_user(cls):
         """Increments user count."""
         cls.user_count += 1
+    
+
+    @classmethod
+    def print_num_users(cls):
+        """Prints number of users."""
+        print(cls.user_count)
 
 
     ##########
