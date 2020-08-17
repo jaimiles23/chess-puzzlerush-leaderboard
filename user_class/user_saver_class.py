@@ -35,6 +35,9 @@ except:
 ##########
 
 class UserSaver(UserConstants):
+    """
+    Class with auxiliary methods to save user profiles.
+    """
 
     ##########
     # Class Constants
@@ -42,9 +45,6 @@ class UserSaver(UserConstants):
 
     csv_file_name = "{}/{}/{}_{}:{}:{}_puzzlerush_leaderboard.csv"
 
-    """
-    Class with auxiliary methods to save user profile.
-    """
 
     ##########
     # CSV Methods
@@ -62,7 +62,7 @@ class UserSaver(UserConstants):
             for u in Users:
                 ## TODO: get values for each user.
                 f.write(u)
-    
+
 
     @staticmethod
     def get_csv_file_name() -> str:
@@ -80,13 +80,43 @@ class UserSaver(UserConstants):
         )
 
 
-    ##########
-    # User Methods
-    ##########
+    # NOTE: may like to make Union type of these to simplify.
+    # base_classes = Union[str, int, float]
 
     @staticmethod
     def get_csv_headers( User: object) -> list:
-        """Returns list of variables for csv headers."""
+        """Returns list of variables for csv headers.
+        
+        Uses recursive function to get csv headers.
+        """
+
+        ## Helper function
+        def add_nested_keys(user_var: dict) -> str:
+            """Returns combination of keys used in player object.
+            
+            If there are nested dictionaries, creates prefixes of nested keys
+            """
+            if not isinstance(user_var, dict):
+                raise TypeError
+
+            keys = []
+            for k, v in user_var.items():
+                
+                if isinstance(v, (str, int, float)):
+                    # if value, add key.
+                    keys.append(k)
+                
+                elif isinstance(k, dict):
+                    nested_keys = add_nested_keys(k)
+                    prefixed_keys = ['_'.join([k, key]) for key in nested_keys]
+                    keys += prefixed_keys
+                
+                else:
+                    raise TypeError
+            return keys
+
+
+        ## Get csv headers
         csv_headers = list()
 
         for var in vars(User):
@@ -94,20 +124,44 @@ class UserSaver(UserConstants):
                 csv_headers.append(var)
 
             elif isinstance(var, dict):
-                pass
+                csv_headers += add_nested_keys(var)
 
             else:
-                raise Exception(f"Unrecognized var type.")
+                raise TypeError
         
         return csv_headers
-            
+
+
+    ##########
+    # User Methods
+    ##########
 
     @staticmethod
     def format_user_vars_for_csv( User: object) -> list:
         """Returns list of user object attributes for csv format.
 
-        NOTE: Want to somehow place user ID at front of list.
+        Uses helper function get_nested_val to traverse dictionaries.
         """
+
+        def get_nested_val(value_dict: Any) -> Union[str, int, float]:
+            """Returns all values and nested values from dictionary."""
+            item_values = []
+
+            for v in value_dict.values():
+                if isinstance(v, (str, int, float)):
+                    item_values.append(v)
+                
+                elif isinstance(v, dict):
+                    for k, v in v.items():
+                        item_values += UserSaver.get_nested_val(v)
+                
+                else:
+                    raise Exception(f"Unrecognized var type: {v}")
+            
+            return item_values
+
+
+        ## Create user vars
         user_vars = list()
 
         for var in vars(User):
@@ -119,88 +173,10 @@ class UserSaver(UserConstants):
 
             else:
                 raise Exception(f"Unrecognized var type: {var}")
-            
+
         return user_vars
 
-
-    @staticmethod
-    def get_nested_val(value_dict: Any) -> Union[str, int, float]:
-        """Returns all values and nested values from dictionary."""
-        item_values = []
-
-        for v in value_dict.values():
-            if isinstance(v, (str, int, float)):
-                item_values.append(v)
-            
-            elif isinstance(v, dict):
-                item_values += UserSaver.get_nested_val(v)
-            
-            else:
-                raise Exception(f"Unrecognized var type: {v}")
-        
-        return item_values
-
-
-    #     user_attr += UserSaver.get_user_info(User)
-
-    #     user_attr.insert(1, User.username)
-    #     user_attr.insert(2, User.score)
-
-    #     ## ratings
-
-    #     ## practices
-
-    #     ## puzzlerush
-
-
-
-
-    #     return user_attr
-
-
-    # @staticmethod
-    # def get_user_info( User: object) -> list:
-    #     """Returns list of user info.
-        
-    #     NOTE: player_id is first constant in list.
-    #     """
-    #     user_info = []
-
-    #     for key in UserSaver.keys_info:
-    #         value = User.user_info[key]
-    #         user_info.append(value)
-        
-    #     return user_info
     
-
-    # @staticmethod
-    # def get_all_user_stats( user_stats_dict: dict) -> list:
-    #     """Returns list of user stats for different game ratings.
-
-    #     Uses recursive helper function to get all dictionary keys and values
-    #     """
-
-    #     def get_dict_values( nested_dict: dict) -> Union[str, int]:
-    #         """Recursive helper function to get nested dict values."""
-    #         if type(nested_dict) != dict:
-    #             return nested_dict
-            
-    #         dict_key = []            
-    #         for k, v in nested_dict.items():
-                
-
-
-
-    #     user_stat_ratings = []
-    #     # NOTE: Could create recursive structure instead?
-
-    #     for k, v in user_stats_dict:
-
-    #         if type(v) == dict:
-    #             pass
-        
-    #     return user_stat_ratings
-
 
 ##########
 # Main
