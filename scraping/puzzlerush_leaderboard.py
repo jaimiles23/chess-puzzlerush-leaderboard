@@ -54,81 +54,83 @@ UserameScore_List = List[UsernameScore]
 # get_usernames_scores
 ##########
 
-def get_usernames_scores() -> UserameScore_List:
-    """Returns list of UsernameScore tuples.
+class LeaderboardScraper():
+    @staticmethod
+    def get_usernames_scores() -> UserameScore_List:
+        """Returns list of UsernameScore tuples.
 
-    TODO: Make each section into different functions??
-    """
-    ##########
-    # Constants
-    ##########
+        TODO: Make each section into different functions??
+        """
+        ##########
+        # Constants
+        ##########
 
-    webpage = "https://www.chess.com/leaderboard/rush?type=hour"
-
-
-    ##########
-    # Driver
-    ##########
-
-    driver = webdriver.Firefox()
-    driver.get(webpage)
+        webpage = "https://www.chess.com/leaderboard/rush?type=hour"
 
 
-    ##########
-    # Elements
-    ##########
+        ##########
+        # Driver
+        ##########
 
-    def get_elements( class_name: str) -> list:
-        """Returns list of elements with passed class_name."""
-    
-        for _ in range(5):
-            output = driver.find_elements_by_class_name(class_name)
-            if len(output):
-                return output
-            
-            logger.info("Trying to connect again...")
-            time.sleep(0.1)     # Table may not load immediately, try 5x
+        driver = webdriver.Firefox()
+        driver.get(webpage)
+
+
+        ##########
+        # Elements
+        ##########
+
+        def get_elements( class_name: str) -> list:
+            """Returns list of elements with passed class_name."""
         
-        raise Exception("Could not locate elements!")
-    
+            for _ in range(5):
+                output = driver.find_elements_by_class_name(class_name)
+                if len(output):
+                    return output
+                
+                logger.info("Trying to connect again...")
+                time.sleep(0.1)     # Table may not load immediately, try 5x
+            
+            raise Exception("Could not locate elements!")
+        
 
-    ########## User name
+        ########## User name
 
-    username_class = "user-username-component"
-    usernames = get_elements(username_class)
-
-
-    ########## Score
-
-    ## get scores
-    score_class = "table-text-right"
-    scores = get_elements(score_class)
-
-    ## Clean scores
-    if scores[0].text == "Rating":
-        del scores[0]
-    else:
-        print(scores[0].text)
-        raise Exception("Rating text not found")
-
-    num_removed = 0
-    for i in range(len(scores)):
-        if scores[i - num_removed].text[0] == "#":
-            del scores[i - num_removed]
-            num_removed += 1
+        username_class = "user-username-component"
+        usernames = get_elements(username_class)
 
 
-    ########## 
-    # Usernames_scores tuple
-    ##########
-    assert len(usernames) == len(scores)
+        ########## Score
 
-    usernames_scores = []
-    for i in range(len(usernames)):
-        entry = ( usernames[i].text, scores[i].text)
-        usernames_scores.append(entry)
+        ## get scores
+        score_class = "table-text-right"
+        scores = get_elements(score_class)
 
-    return usernames_scores
+        ## Clean scores
+        if scores[0].text == "Rating":
+            del scores[0]
+        else:
+            print(scores[0].text)
+            raise Exception("Rating text not found")
+
+        num_removed = 0
+        for i in range(len(scores)):
+            if scores[i - num_removed].text[0] == "#":
+                del scores[i - num_removed]
+                num_removed += 1
+
+
+        ########## 
+        # Usernames_scores tuple
+        ##########
+        assert len(usernames) == len(scores)
+
+        usernames_scores = []
+        for i in range(len(usernames)):
+            entry = ( usernames[i].text, scores[i].text)
+            usernames_scores.append(entry)
+
+        return usernames_scores
 
 
 ##########
@@ -136,7 +138,7 @@ def get_usernames_scores() -> UserameScore_List:
 ##########
 
 def main():
-    usernames_scores = get_usernames_scores()
+    usernames_scores = LeaderboardScraping.get_usernames_scores()
     
     for user, score in usernames_scores:
         print(f"{user}\t{score}")

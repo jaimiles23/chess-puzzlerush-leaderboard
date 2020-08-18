@@ -29,7 +29,7 @@ import requests
 from selenium import webdriver
 
 
-from scraping import puzzlerush_leaderboard
+from scraping.puzzlerush_leaderboard import LeaderboardScraper
 from user_class.user import User
 from user_class.user_saver import UserSaver
 
@@ -41,7 +41,7 @@ from user_class.user_saver import UserSaver
 def main():
     
     ## Get leaderboard usernames & scores
-    usernames_scores = puzzlerush_leaderboard.get_usernames_scores()
+    usernames_scores = LeaderboardScraper.get_usernames_scores()
 
     ## Create user profiles
     user_profiles = []
