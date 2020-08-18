@@ -30,8 +30,8 @@ from selenium import webdriver
 
 
 from scraping import puzzlerush_leaderboard
-from user_class.create_user import User
-
+from user_class.user import User
+from user_class.user_saver import UserSaver
 
 
 ##########
@@ -47,16 +47,11 @@ def main():
     user_profiles = []
     for username, score in usernames_scores:
         user_profiles.append( User(username, score))
-    
-    ## View user profiles
-    for i in range(len(user_profiles)):
-        print(i + 1, '\t', end = "")
-        user_profiles[i].view_profile()
 
     ## Save user information
+    UserSaver.write_users_to_csv(user_profiles)
 
  
-
 
 ##########
 # main == name
