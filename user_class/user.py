@@ -350,7 +350,7 @@ class User(UserConstants):
     def convert_timestamp_attrs(self) -> None:
         """Converts timestamp data to str dates."""
         for attr in User.timestamps_to_datetimes:
-            attr_timestamp = getattr(self, attr)
+            attr_timestamp = int(getattr(self, attr))
             setattr(self, attr,
                 datetime.fromtimestamp(attr_timestamp))
         return
