@@ -14,6 +14,6 @@
 # Imports
 ##########
 
-from user import User
-from user_saver import UserSaver
+from user_class.user import User
+from user_class.user_saver import UserSaver
 
