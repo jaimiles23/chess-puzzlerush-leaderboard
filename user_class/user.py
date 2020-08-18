@@ -34,8 +34,10 @@ from typing import Tuple, Union, List
 
 try:
     from user_class.user_constants import UserConstants
+    from user_class.logger import logger
 except:
     from user_constants import UserConstants
+    from logger import logger
 
 
 ##########
@@ -66,6 +68,7 @@ class User(UserConstants):
     def add_user(cls):
         """Increments user count."""
         cls.user_count += 1
+        logger.debug(f"User # {User.user_count}")
     
 
     @classmethod
@@ -176,13 +179,8 @@ class User(UserConstants):
                         value = User.convert_to_strtime(value)
 
                 except (KeyError, AttributeError) as e:
-                    # ## ADD LOGGER.
                     value = None
-                    # print("#" * 10, e)
-                    # print(top_dict, key_tuple, key, nested_dict, nested_key_tuple, nested_key, sep = "\n")
-                    # value = None
-                    pass
-
+                    logger.info(f"{e} \n\n {key}, {nested_key_tuple}, {nested_key}")
 
                 new_key = '_'.join([mode, key, nested_key])
                 attr_info_list.append( (new_key, value))
@@ -196,12 +194,12 @@ class User(UserConstants):
         modes: tuple, 
         dict_key_structure: KeyTuple
         ) -> AttrInfoList:
-        """Returns user's list of AttrInfoList  for each mode.
+        """Returns user's list of AttrInfoList for each mode.
 
         params:
         > user_stat_dict: dict. User dict of all user statistics
         > modes: tuple. Modes to access from user_stat_dict.
-        > dict_key_strucutre: tuple. Mapping of the dict keys in the mode dictionay.
+        > dict_key_strucutre: tuple. Mapping of the dict keys in the mode dictionary.
         """
         attr_info_list = []
         
@@ -214,7 +212,7 @@ class User(UserConstants):
             attr_info_list.append(attr_info)
         
         return attr_info_list
-    
+
 
     ##########
     # Instance
@@ -231,7 +229,7 @@ class User(UserConstants):
         - daily
 
         NOTE: information on player_id and score are set first
-        because this is ultimately the information of interest.
+        because this is ultimate the information of interest.
         """
 
         ## First, then later set by set_attrinfo_userinfo()
@@ -397,9 +395,6 @@ class User(UserConstants):
         )
         print(items, sep = "\t")
     
-
-    
-
 
 ##########
 # Main

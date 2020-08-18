@@ -37,15 +37,25 @@ import time
 
 
 from selenium import webdriver
+from typing import Tuple, List
 
 
+from logger import logger
+
+
+##########
+# Type Hinting
+##########
+
+UsernameScore = Tuple[str, int]
+UserameScore_List = List[UsernameScore]
 
 ##########
 # get_usernames_scores
 ##########
 
-def get_usernames_scores() -> tuple:
-    """Returns tuple of player's user names and scores.
+def get_usernames_scores() -> UserameScore_List:
+    """Returns list of UsernameScore tuples.
 
     TODO: Make each section into different functions??
     """
@@ -75,7 +85,8 @@ def get_usernames_scores() -> tuple:
             output = driver.find_elements_by_class_name(class_name)
             if len(output):
                 return output
-
+            
+            logger.info("Trying to connect again...")
             time.sleep(0.1)     # Table may not load immediately, try 5x
         
         raise Exception("Could not locate elements!")
@@ -85,9 +96,6 @@ def get_usernames_scores() -> tuple:
 
     username_class = "user-username-component"
     usernames = get_elements(username_class)
-
-    # for user in usernames:
-    #     print(user.text)
 
 
     ########## Score

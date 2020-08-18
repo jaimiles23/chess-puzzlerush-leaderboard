@@ -5,9 +5,6 @@
  * @modify date 2020-08-17 18:24:40
  * @desc [
     Class to save user profiles to csv.
-
-
-    May like to
  ]
  */
 """
@@ -28,10 +25,12 @@ from typing import Union, Any
 try:
     from user_class.user import User
     from user_class.user_constants import UserConstants
+    from user_class.logger import logger
 
 except: 
     from user import User
     from user_constants import UserConstants
+    from logger import logger
 
 
 ##########
@@ -62,6 +61,7 @@ class UserSaver(UserConstants):
         """
         UserSaver.mkdir_if_needed()
         csv_file_name = UserSaver.get_csv_file_name()
+        logger.debug(f"{'#' * 5} Logging to: {csv_file_name}")
 
         with open(csv_file_name, 'w') as f:
             ## CSV Headers
@@ -71,9 +71,13 @@ class UserSaver(UserConstants):
 
             ## User Info
             for User in Users:
+                logger.debug(f"User: {User.username}")
                 user_info = UserSaver.get_user_info(User)
+
                 f.write(user_info)
                 f.write('\n')
+        
+        logger.info(f"{'#' * 5} Logged users to: {csv_file_name}")
         return
 
 
@@ -100,7 +104,7 @@ class UserSaver(UserConstants):
         NOTE: need to format digits HH, MM, SS
         """
         now_obj = datetime.now()
-        
+                
         return UserSaver.csv_file_name.format(
             now_obj.year,
             now_obj.month,
