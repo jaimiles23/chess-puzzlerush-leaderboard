@@ -2,7 +2,7 @@
  * @author [Jai Miles]
  * @email [jaimiles23@gmail.com]
  * @create date 2020-08-16 17:40:01
- * @modify date 2020-08-16 17:40:01
+ * @modify date 2020-08-17 18:24:40
  * @desc [
     Class to save user profiles to csv.
 
@@ -43,7 +43,7 @@ class UserSaver(UserConstants):
     # Class Constants
     ##########
 
-    csv_file_name = "{}.{}.{}_{}:{}:{}_puzzlerush_leaderboard.csv"
+    csv_file_name = "{}.{}.{}_{}.{}.{}_puzzlerush_leaderboard.csv"
 
 
     ##########
@@ -56,14 +56,20 @@ class UserSaver(UserConstants):
         Writes passed users to csv.
         """
         csv_file_name = UserSaver.get_csv_file_name()
-        csv_file_name=  'testing.csv'
+        # csv_file_name=  'testing.csv'
+
 
         with open(csv_file_name, 'w') as f:
+            ## CSV Headers
+            csv_headers = UserSaver.get_csv_headers( Users[0])
+            f.write(csv_headers)
+            f.write('\n')
 
+            ## User Info
             for User in Users:
                 user_info = UserSaver.get_user_info(User)
                 f.write(user_info)
-        
+                f.write('\n')
         return
 
 
@@ -89,9 +95,9 @@ class UserSaver(UserConstants):
     # base_classes = Union[str, int, float]
 
     @staticmethod
-    def get_csv_headers( user_obj: object) -> list:
-        """Returns list of variables for csv headers."""
-        return vars(user_obj)
+    def get_csv_headers( user_obj: object) -> str:
+        """Returns str of variables for csv headers."""
+        return ','.join(vars(user_obj))
 
 
     ##########
@@ -99,13 +105,13 @@ class UserSaver(UserConstants):
     ##########
 
     @staticmethod
-    def get_user_info( user_obj: object) -> list:
-        """Returns list of user information to write to csv."""
+    def get_user_info( user_obj: object) -> str:
+        """Returns str of user information to write to csv."""
         user_info = list()
 
         for var in vars(user_obj):
             user_info.append( getattr(user_obj, var))
-            
+
         return ','.join(user_info)
 
 
