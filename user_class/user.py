@@ -226,6 +226,8 @@ class User(UserConstants):
         - puzzle rush
         - daily
         """
+        ## First, then later set by set_attrinfo_userinfo()
+        self.player_id = None
 
         ## Init args
         self.username = username
