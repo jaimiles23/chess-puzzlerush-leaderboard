@@ -348,11 +348,27 @@ class User(UserConstants):
 
     ########## Datetime
     def convert_timestamp_attrs(self) -> None:
-        """Converts timestamp data to str dates."""
-        for attr in User.timestamps_to_datetimes:
-            attr_timestamp = int(getattr(self, attr))
-            setattr(self, attr,
-                datetime.fromtimestamp(attr_timestamp))
+        """Converts timestamp data to str dates.
+
+            - joined attr
+            - any attr with 'date' in the name.
+        """
+        def _get_datetime_str(timestamp: int) -> str:
+            """Auxiliary method to return datetime string from timestamp."""
+            datetime_obj = datetime.fromtimestamp( int(timestamp))
+            return datetime_obj.strftime("%Y.%m.%d")
+
+
+        ## Convert joined
+        joined_timestamp = getattr(self, 'joined')
+        setattr(self, 'joined', _get_datetime_str(joined_timestamp))
+
+        ## Convert attr with date in name.
+        for attr in vars(self):
+            if 'date' in attr:
+                attr_timestamp = int(getattr(self, attr))
+                setattr(self, attr,
+                    _get_datetime_str(attr_timestamp))
         return
 
 
