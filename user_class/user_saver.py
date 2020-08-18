@@ -87,106 +87,23 @@ class UserSaver(UserConstants):
 
     @staticmethod
     def get_csv_headers( user_obj: object) -> list:
-        """Returns list of variables for csv headers.
+        """Returns list of variables for csv headers."""
+        return vars(user_obj)
         
-        Uses recursive function to get csv headers.
-        """
-
-        ## Helper function
-        def add_nested_keys(user_var: dict) -> str:
-            """Returns combination of keys used in player object.
-            
-            If there are nested dictionaries, creates prefixes of nested keys
-            """
-            if not isinstance( var, dict):
-                raise TypeError
-
-            keys = []
-            for k, v in user_var.items():
-                
-                if isinstance(v, (str, int, float, None)):
-                    # if value, add key.
-                    keys.append(k)
-                
-                elif isinstance(v, dict):
-                    nested_keys = add_nested_keys(v)
-                    prefixed_keys = ['_'.join([k, key]) for key in nested_keys]
-                    keys += prefixed_keys
-                
-                else:
-                    raise TypeError
-            return keys
-
-
-        ## Get csv headers
-        csv_headers = list()
-
-        for v in vars(user_obj):
-
-            print(v, end = ' - ')
-            var = getattr(user_obj, v)
-            print(type(var))
-            print(var)
-
-            if isinstance( var, (str, int, float)):
-                print('base')
-                csv_headers.append(var)
-
-            elif isinstance( var, dict):
-                print('dict')
-                csv_headers += add_nested_keys(var)
-
-            else:
-                raise TypeError
-        
-        return csv_headers
-
 
     ##########
     # User Methods
     ##########
 
     @staticmethod
-    def format_user_vars_for_csv( User: object) -> list:
-        """Returns list of user object attributes for csv format.
+    def get_user_info( user_obj: object) -> list:
+        """Returns list of user information to write to csv."""
+        user_info = list()
 
-        Uses helper function get_nested_val to traverse dictionaries.
-        """
-
-        def get_nested_val(value_dict: Any) -> Union[str, int, float]:
-            """Returns all values and nested values from dictionary."""
-            item_values = []
-
-            for v in value_dict.values():
-                if isinstance(v, (str, int, float)):
-                    item_values.append(v)
-                
-                elif isinstance(v, dict):
-                    for k, v in v.items():
-                        item_values += UserSaver.get_nested_val(v)
-                
-                else:
-                    raise Exception(f"Unrecognized var type: {v}")
+        for var in vars(user_obj):
+            user_info.append( getattr(user_obj, var))
+        return user_info
             
-            return item_values
-
-
-        ## Create user vars
-        user_vars = list()
-
-        for var in vars(User):
-            if isinstance(var, (str, int, float)):
-                user_vars.append(User.var)
-            
-            elif isinstance(var, dict):
-                user_vars += UserSaver.get_nested_val(var)
-
-            else:
-                raise Exception(f"Unrecognized var type: {var}")
-
-        return user_vars
-
-    
 
 ##########
 # Main
