@@ -1,10 +1,11 @@
+
 # Puzzle Rush Leaderboard Data Pipeline
 This repo contains code for a data pipeline to analyze chess.com's [puzzle rush leaderboards](https://www.chess.com/leaderboard/rush?type=hour). 
 
 
 ## Inspiration 
 
-Chess.com's Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-time high of 91 by GM [Ray Robson](https://www.chess.com/member/spicycaterpillar) to scores as low as 35 on the Global Hourly Leaderboard. The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
+Chess.com's Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to scores as low as 35 on the Global Hourly Leaderboard. The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
 
 > Add interest from accidentally placing on LB
 
@@ -20,8 +21,10 @@ There are 5 steps in this data pipeline:
 > TODO: - Create data pipeline graphic w/ pictures of technologies used.
 
 
-### Web scraping
-
+1. Web scraping:
+   1. LeaderboardScraper class uses selenium to retrieve usernames and scores from chess.com. Cleans data and returns a list of tuples containing the username and their puzzle rush score.
+2. Create user profile:
+   1. 
 
 ### Create user profiles
 
