@@ -251,7 +251,9 @@ class User(UserConstants):
         """Sets self.attr for each attr, info in list.
         """
         for attr, info in attrinfo_list:
-            setattr(self, attr, str(info))
+            if isinstance(info, int):   # convert only int types.
+                info = str(info)
+            setattr(self, attr, info)
         
         return
 
@@ -343,7 +345,10 @@ class User(UserConstants):
         If there are commas, displaces csv format.
         e.g., La Jolla, California.
         """
+        if not self.location:
+            return
         self.location = self.location.replace(",", "")
+
 
 
     ########## Datetime
@@ -353,9 +358,10 @@ class User(UserConstants):
             - joined attr
             - any attr with 'date' in the name.
         """
+
         def _get_datetime_str(timestamp: int) -> str:
             """Auxiliary method to return datetime string from timestamp."""
-            if not timestamp:
+            if timestamp is None:
                 return None
             
             datetime_obj = datetime.fromtimestamp( int(timestamp))
