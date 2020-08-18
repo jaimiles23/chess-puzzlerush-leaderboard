@@ -225,13 +225,17 @@ class User(UserConstants):
         - practice
         - puzzle rush
         - daily
+
+        NOTE: information on player_id and score are set first
+        because this is ultimately the information of interest.
         """
         ## First, then later set by set_attrinfo_userinfo()
         self.player_id = None
 
         ## Init args
-        self.username = username
         self.score = str(score)
+        self.username = username
+        
 
         ## webpages & json
         self.user_url = User.user_url.format(self.username)
