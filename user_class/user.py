@@ -355,6 +355,9 @@ class User(UserConstants):
         """
         def _get_datetime_str(timestamp: int) -> str:
             """Auxiliary method to return datetime string from timestamp."""
+            if not timestamp:
+                return None
+            
             datetime_obj = datetime.fromtimestamp( int(timestamp))
             return datetime_obj.strftime("%Y.%m.%d")
 
@@ -366,7 +369,7 @@ class User(UserConstants):
         ## Convert attr with date in name.
         for attr in vars(self):
             if 'date' in attr:
-                attr_timestamp = int(getattr(self, attr))
+                attr_timestamp = getattr(self, attr)
                 setattr(self, attr,
                     _get_datetime_str(attr_timestamp))
         return
