@@ -52,7 +52,7 @@ UserameScore_List = List[UsernameScore]
 
 
 ##########
-# get_usernames_scores
+# LeaderboardScraper
 ##########
 
 class LeaderboardScraper():
@@ -66,19 +66,21 @@ class LeaderboardScraper():
 
     webpage = "https://www.chess.com/leaderboard/rush?type=hour"
 
+
+    ##########
+    # Static Methods
+    ##########
+
     @staticmethod
     def get_usernames_scores() -> UserameScore_List:
         """Returns list of UsernameScore tuples.
 
         TODO: Make each section into different functions??
         """
-        ##########
-        # Elements
-        ##########
 
         def _get_elements( class_name: str) -> list:
-            """Returns list of elements with passed class_name."""
-        
+            """Auxiliary method to get list of elements with class_name."""
+
             for _ in range(5):
                 output = driver.find_elements_by_class_name(class_name)
                 if len(output):
@@ -93,6 +95,7 @@ class LeaderboardScraper():
         ##### Driver
         driver = webdriver.Firefox()
         driver.get(LeaderboardScraper.webpage)
+
 
         ##### User name
         username_class = "user-username-component"
@@ -136,7 +139,7 @@ class LeaderboardScraper():
 ##########
 
 def main():
-    usernames_scores = LeaderboardScraping.get_usernames_scores()
+    usernames_scores = LeaderboardScraper.get_usernames_scores()
     
     for user, score in usernames_scores:
         print(f"{user}\t{score}")
