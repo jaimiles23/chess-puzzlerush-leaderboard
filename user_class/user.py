@@ -374,7 +374,7 @@ class User(UserConstants):
 
         ## Test country attr
         assert len( country_attr) == len(url_base) + 2
-        assert country_attr.find(url_base)
+        assert country_attr.find(url_base) != -1
 
         setattr(self, 'country', country_attr[-2:])
         return
