@@ -17,8 +17,12 @@
 # Imports
 ##########
 
+import os
+
+
 from datetime import datetime
 from typing import Union, Any
+
 
 ## NOTE: Could also use if name == main for import statements..?
 try:
@@ -43,11 +47,12 @@ class UserSaver(UserConstants):
     # Class Constants
     ##########
 
-    csv_file_name = "{}.{}.{}_{}.{}.{}_puzzlerush_leaderboard.csv"
+    directory = "puzzlerush_csvs"
+    csv_file_name = directory + "\\{}.{}.{}_{}.{}.{}_puzzlerush_leaderboard.csv"
 
 
     ##########
-    # CSV Methods
+    # Write to CSV
     ##########
 
     @staticmethod
@@ -55,9 +60,8 @@ class UserSaver(UserConstants):
         """
         Writes passed users to csv.
         """
+        UserSaver.mkdir_if_needed()
         csv_file_name = UserSaver.get_csv_file_name()
-        # csv_file_name=  'testing.csv'
-
 
         with open(csv_file_name, 'w') as f:
             ## CSV Headers
@@ -72,6 +76,22 @@ class UserSaver(UserConstants):
                 f.write('\n')
         return
 
+
+    ##########
+    # Directory methods
+    ##########
+    @staticmethod
+    def mkdir_if_needed() -> None:
+        """If directory does not exist, then create directory.
+        """
+        if not os.path.exists(UserSaver.directory):
+            os.makedirs(UserSaver.directory)
+        return
+    
+
+    ##########
+    # CSV Methods
+    ##########
 
     @staticmethod
     def get_csv_file_name() -> str:
@@ -113,6 +133,7 @@ class UserSaver(UserConstants):
             user_info.append( getattr(user_obj, var))
 
         return ','.join(user_info)
+
 
 
 ##########
