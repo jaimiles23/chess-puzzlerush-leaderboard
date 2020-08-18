@@ -29,9 +29,9 @@ def test_csv_headers():
     Test if UserSaver.get_csv_headers() functions correctly.
     """
     jai = user.instantiate_user()
-    keys = user_saver.UserSaver.get_csv_headers(jai)
-
-    print(keys)
+    keys = user_saver.UserSaver.get_csv_headers(jai).split(',')
+    for k in keys:
+        print(k)
 
 
 def test_write_user_info():
@@ -54,7 +54,7 @@ def main():
     """
     Run module unit tests.
     """
-    test_csv_headers()
+    # test_csv_headers()
     test_write_user_info()
 
 
