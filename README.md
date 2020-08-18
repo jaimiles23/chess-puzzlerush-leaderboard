@@ -24,15 +24,17 @@ There are 5 steps in this data pipeline:
 1. Web scraping:
    1. LeaderboardScraper class uses selenium to retrieve usernames and scores from chess.com. Cleans data and returns a list of tuples containing the username and their puzzle rush score.
 2. Create user profile:
+   1. Creates User classes for each username on Leaderboard. Connects to chess.com's API to retrieve user information for exploratory data analysis. UserSaver class writes player profiles to csv file.
+3. Store data
    1. 
 
-### Create user profiles
 
-### Store the data
 
 ### Store data
 
+
 ### Query data
+
 
 ### Analyze & communicate
 
