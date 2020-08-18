@@ -2,12 +2,12 @@
  * @author [Jai Miles]
  * @email [jaimiles23@gmail.com]
  * @create date 2020-08-15 23:06:48
- * @modify date 2020-08-16 13:38:14
+ * @modify date 2020-08-18 15:30:07
  * @desc [
     Contains player class to hold player's statistics.
 
     NOTE
-    I process the chess.com API data itno a standardized form within each user profile.
+    I process the chess.com API data into a standardized form within each user profile.
     I select data that I may find relevant/interesting to analysis and standardize
     timestamps into str-datetime format.
 
@@ -32,22 +32,25 @@ import pandas as pd
 import requests
 from typing import Tuple, Union, List
 
+
 try:
     from user_class.user_constants import UserConstants
     from user_class.logger import logger
+
 except:
     from user_constants import UserConstants
     from logger import logger
 
 
 ##########
-# Types
+# Class-specific types
 ##########
 
-AttrInfo = Tuple[str, Union[str, int]]
+AttrInfo = Tuple[str, Union[str, int]]  # User attr field & info to assign to attr
 AttrInfoList = List[AttrInfo]
 
-KeyTuple = Tuple[str, tuple]
+KeyTuple = Tuple[str, tuple]            # Dict key structure for API
+
 
 
 ##########
@@ -63,7 +66,6 @@ class User(UserConstants):
 
 
     ########## Methods
-
     @classmethod
     def add_user(cls):
         """Increments user count."""
@@ -99,58 +101,6 @@ class User(UserConstants):
         
         return results.json()
     
-    
-    ########## Datetime
-    """
-    NOTE: Can run this AFTER all attributes have been set now that no
-    longer in dictionary.
-    Can also do this for location - if there is a comma, will displace csv.
-    """
-    @staticmethod
-    def check_if_timestamp(key: str) -> bool:
-        """Returns bool if value needs to be converted to str date.
-        """
-        if key in User.timestamps_to_datetimes:
-            return True
-        return False
-
-
-    @staticmethod
-    def convert_to_strtime(timestamp: int) -> str:
-        """Returns string date from timestamp."""
-        date_obj = datetime.fromtimestamp(timestamp)
-        return date_obj.strftime("%Y/%m/%d %H:%M:%S")
-    
-
-    ########## Country
-    @staticmethod
-    def check_if_country(key: str) -> bool:
-        """Returns bool if country key that needs to be shortened."""
-        return key == "country"
-    
-
-    @staticmethod
-    def parse_country(value: str) -> str:
-        """Returns country code represented by 2-character ISO 3166 code.
-        
-        ISO 3166 code:
-        https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-
-        Chess.com API format:
-        https://api.chess.com/pub/country/{iso}
-
-        NOTE: 
-            - Can compare country tzs in data analysis.
-        """
-        url_base = "https://api.chess.com/pub/country/"
-
-        if value.find(url_base) == -1:
-            ## TODO: Add logger
-            return None
-
-        else:
-            return value[-2:]        
-
 
     ########## AttrInfoList
     """
@@ -174,9 +124,6 @@ class User(UserConstants):
                 try:
                     nested_dict = top_dict.get(key, None)
                     value = nested_dict.get(nested_key, None)
-
-                    if User.check_if_timestamp(nested_key):
-                        value = User.convert_to_strtime(value)
 
                 except (KeyError, AttributeError) as e:
                     value = None
@@ -215,7 +162,7 @@ class User(UserConstants):
 
 
     ##########
-    # Instance
+    # Initialize
     ##########
 
     def __init__(self, username: str, score: int):
@@ -254,19 +201,43 @@ class User(UserConstants):
         self.set_attrinfo_practice()
         self.set_attrinfo_puzzlerush()
 
+        ## Clean attrs
+        self.clean_location()
+        self.set_country_code()
+        self.convert_timestamp_attrs()
+
         ## increment user
         User.add_user()
+
+        ## clean user attr
 
         ## clean attr
         self.__delattr__('user_info_dict')
         self.__delattr__('user_stats_dict')
 
 
-    ########## Add Attr Info
+    ##########
+    # User API info
+    ##########
+
+    def fetch_userinfo_dict(self) -> dict:
+        """Returns dict from user's chess.com API"""
+        return User.get_chessAPI_json( self.user_url)
+    
+
+    def fetch_userstats_dict(self) -> dict:
+        """Returns dict from user's chess.com stats API"""
+        return User.get_chessAPI_json( self.user_stats_url)
+
+
+    ##########
+    # AttrInfo methods
+    ##########
+
+    ########## Helper methods
     """
     Helper methods to set user instance attributes from AttrInfoList.
     """
-
     def set_attrinfo_per_mode(self, attrinfolist_modes: list) -> None:
         """Sets the attribute info for each mode in AttrInfoList.
         """
@@ -285,20 +256,7 @@ class User(UserConstants):
         return
 
 
-    ########## Get user info dicts
-
-    def fetch_userinfo_dict(self) -> dict:
-        """Returns dict from user's chess.com API"""
-        return User.get_chessAPI_json( self.user_url)
-    
-
-    def fetch_userstats_dict(self) -> dict:
-        """Returns dict from user's chess.com stats API"""
-        return User.get_chessAPI_json( self.user_stats_url)
-
-
-    ########## User information
-
+    ########## User Info
     def set_attrinfo_userinfo(self) -> None:
         """Sets user information attributes."""
         user_info_attrinfo_list = self.get_attrinfolist_userinfo()
@@ -313,19 +271,12 @@ class User(UserConstants):
 
         for key in User.keys_info:
             value = self.user_info_dict.get(key, None)
-
-            if User.check_if_timestamp(key):
-                value = User.convert_to_strtime(value)
-            elif User.check_if_country(key):
-                value = User.parse_country(value)
-
             user_info_attrinfo_list.append( (key, value))
 
         return user_info_attrinfo_list
     
     
     ########## Mode info (blitz, bullet, daily, rapid)
-
     def set_attrinfo_ratings(self) -> None:
         """Sets user attributes for different rating modes.
 
@@ -347,7 +298,6 @@ class User(UserConstants):
         
 
     ########## Practice (tactics, lessons)
-
     def set_attrinfo_practice(self) -> list:
         """Sets user's attributes for practice modes.
 
@@ -366,7 +316,6 @@ class User(UserConstants):
     
 
     ########## Puzzle Rush
-
     def set_attrinfo_puzzlerush(self) -> list:
         """Sets user's attributes for puzzle rush.
         
@@ -382,8 +331,59 @@ class User(UserConstants):
         self.set_attrinfo_per_mode(puzzlerush_attrinfo_list)
         return
 
+
+    ##########
+    # Clean attr methods
+    ##########
+
+    ########## Location
+    def clean_location(self) -> None:
+        """Removes commas from User.location attribute.
+
+        If there are commas, displaces csv format.
+        e.g., La Jolla, California.
+        """
+        self.location = self.location.replace(",", "")
+
+
+    ########## Datetime
+    def convert_timestamp_attrs(self) -> None:
+        """Converts timestamp data to str dates."""
+        for attr in User.timestamps_to_datetimes:
+            attr_timestamp = getattr(self, attr)
+            setattr(self, attr,
+                datetime.fromtimestamp(attr_timestamp))
+        return
+
+
+    ########## Country
+    def set_country_code(self) -> None:
+        """Sets player's country attr to code represented by 2-character ISO 3166 code.
+        
+        ISO 3166 code:
+        https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+
+        Chess.com API format:
+        https://api.chess.com/pub/country/{iso}
+
+        NOTE: 
+            - Can compare country tzs in data analysis.
+        """
+        url_base = "https://api.chess.com/pub/country/"
+        country_attr = getattr(self, 'country')
+
+        ## Test country attr
+        assert len( country_attr) == (url_base + 2)
+        assert country_attr.find(url_base)
+
+        setattr(self, 'country', country_attr[-2:])
+        return
     
-    ########## View player profile
+
+    ##########
+    # View profile 
+    ##########
+
     def view_profile(self) -> None:
         """Prints attributes from the player profile for viewing."""
         items = (
@@ -394,7 +394,7 @@ class User(UserConstants):
             # self.bullet,
         )
         print(items, sep = "\t")
-    
+
 
 ##########
 # Main
