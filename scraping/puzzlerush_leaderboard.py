@@ -50,11 +50,22 @@ from logger import logger
 UsernameScore = Tuple[str, int]
 UserameScore_List = List[UsernameScore]
 
+
 ##########
 # get_usernames_scores
 ##########
 
 class LeaderboardScraper():
+    """
+    Contains methods & constants to scrape chess.com puzzle rush leaderboard.
+    """
+
+    ##########
+    # Constants
+    ##########
+
+    webpage = "https://www.chess.com/leaderboard/rush?type=hour"
+
     @staticmethod
     def get_usernames_scores() -> UserameScore_List:
         """Returns list of UsernameScore tuples.
@@ -62,25 +73,10 @@ class LeaderboardScraper():
         TODO: Make each section into different functions??
         """
         ##########
-        # Constants
-        ##########
-
-        webpage = "https://www.chess.com/leaderboard/rush?type=hour"
-
-
-        ##########
-        # Driver
-        ##########
-
-        driver = webdriver.Firefox()
-        driver.get(webpage)
-
-
-        ##########
         # Elements
         ##########
 
-        def get_elements( class_name: str) -> list:
+        def _get_elements( class_name: str) -> list:
             """Returns list of elements with passed class_name."""
         
             for _ in range(5):
@@ -92,21 +88,25 @@ class LeaderboardScraper():
                 time.sleep(0.1)     # Table may not load immediately, try 5x
             
             raise Exception("Could not locate elements!")
-        
 
-        ########## User name
 
+        ##### Driver
+        driver = webdriver.Firefox()
+        driver.get(LeaderboardScraper.webpage)
+
+        ##### User name
         username_class = "user-username-component"
-        usernames = get_elements(username_class)
+        usernames = _get_elements(username_class)
 
 
-        ########## Score
+        ##### Scores
 
         ## get scores
         score_class = "table-text-right"
-        scores = get_elements(score_class)
+        scores = _get_elements(score_class)
 
-        ## Clean scores
+        ## clean scores
+        # initial table text is rating.
         if scores[0].text == "Rating":
             del scores[0]
         else:
@@ -120,9 +120,7 @@ class LeaderboardScraper():
                 num_removed += 1
 
 
-        ########## 
-        # Usernames_scores tuple
-        ##########
+        ##### Usernames_scores tuple
         assert len(usernames) == len(scores)
 
         usernames_scores = []
