@@ -2,9 +2,9 @@
  * @author [Jai Miles]
  * @email [jaimiles23@gmail.com]
  * @create date 2020-08-16 20:23:46
- * @modify date 2020-08-16 20:23:46
+ * @modify date 2020-08-17 17:40:00
  * @desc [
-    Parent user class that contains constants used for
+    Parent user class that contains constants to reference.
 
  ]
  */
@@ -24,14 +24,34 @@
 class UserConstants(object):
     """
     Parent class that contains constants for:
+        - API urls
+        - Auxiliary lists
         - Activity modes
-        - Dictionary data structures
+        - Key Tuples - dictionary data structures
 
     NOTE: Careful consideration of tuple data structure 
     Even if single item, must still have comma after so 
     script considers the structure iterable 
     """
 
+    ##########
+    # API URLs
+    ##########
+
+    user_url = "https://api.chess.com/pub/player/{}"
+    user_stats_url = "https://api.chess.com/pub/player/{}/stats"
+    
+
+    ##########
+    # Aux lists
+    ##########
+
+    timestamps_to_datetimes = (
+        'joined',
+        'date',
+    )
+    
+    
     ##########
     # Modes
     ##########
