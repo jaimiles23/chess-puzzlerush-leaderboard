@@ -251,9 +251,7 @@ class User(UserConstants):
         """Sets self.attr for each attr, info in list.
         """
         for attr, info in attrinfo_list:
-            if isinstance(info, int):   # convert only int types.
-                info = str(info)
-            setattr(self, attr, info)
+            setattr(self, attr, str(info))
         
         return
 
@@ -361,8 +359,8 @@ class User(UserConstants):
 
         def _get_datetime_str(timestamp: int) -> str:
             """Auxiliary method to return datetime string from timestamp."""
-            if timestamp is None:
-                return None
+            if timestamp == 'None':         # attrInfo records as string to record to CSV.
+                return timestamp
             
             datetime_obj = datetime.fromtimestamp( int(timestamp))
             return datetime_obj.strftime("%Y.%m.%d")
