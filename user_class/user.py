@@ -98,6 +98,11 @@ class User(UserConstants):
     
     
     ########## Datetime
+    """
+    NOTE: Can run this AFTER all attributes have been set now that no
+    longer in dictionary.
+    Can also do this for location - if there is a comma, will displace csv.
+    """
     @staticmethod
     def check_if_timestamp(key: str) -> bool:
         """Returns bool if value needs to be converted to str date.
@@ -114,8 +119,7 @@ class User(UserConstants):
         return date_obj.strftime("%Y/%m/%d %H:%M:%S")
     
 
-    ##########Country
-
+    ########## Country
     @staticmethod
     def check_if_country(key: str) -> bool:
         """Returns bool if country key that needs to be shortened."""
@@ -229,6 +233,7 @@ class User(UserConstants):
         NOTE: information on player_id and score are set first
         because this is ultimately the information of interest.
         """
+
         ## First, then later set by set_attrinfo_userinfo()
         self.player_id = None
 
