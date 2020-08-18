@@ -33,6 +33,7 @@
 # Imports
 ##########
 
+import logging
 import time  
 
 
@@ -40,7 +41,8 @@ from selenium import webdriver
 from typing import Tuple, List
 
 
-from logger import logger
+from scraping.logger import logger
+
 
 
 ##########
