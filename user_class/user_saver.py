@@ -115,9 +115,6 @@ class UserSaver(UserConstants):
         )
 
 
-    # NOTE: may like to make Union type of these to simplify.
-    # base_classes = Union[str, int, float]
-
     @staticmethod
     def get_csv_headers( user_obj: object) -> str:
         """Returns str of variables for csv headers."""
