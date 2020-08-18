@@ -42,12 +42,11 @@ def test_write_user_info():
     users = [jai]
 
     user_saver.UserSaver.write_users_to_csv(users)
-    
+
 
 ##########
 # Main
 ##########
-
 
 
 def main():
