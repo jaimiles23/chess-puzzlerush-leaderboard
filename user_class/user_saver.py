@@ -43,7 +43,7 @@ class UserSaver(UserConstants):
     # Class Constants
     ##########
 
-    csv_file_name = "{}/{}/{}_{}:{}:{}_puzzlerush_leaderboard.csv"
+    csv_file_name = "{}.{}.{}_{}:{}:{}_puzzlerush_leaderboard.csv"
 
 
     ##########
@@ -56,6 +56,7 @@ class UserSaver(UserConstants):
         Writes passed users to csv.
         """
         csv_file_name = UserSaver.get_csv_file_name()
+        csv_file_name=  'testing.csv'
 
         with open(csv_file_name, 'w') as f:
 
@@ -104,7 +105,8 @@ class UserSaver(UserConstants):
 
         for var in vars(user_obj):
             user_info.append( getattr(user_obj, var))
-        return user_info
+            
+        return ','.join(user_info)
 
 
 ##########
