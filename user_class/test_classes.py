@@ -15,17 +15,9 @@
 # Imports
 ##########
 
-from user_constants import UserConstants
-from create_user_class import (
-    User, 
-    test_user_class, 
-    instantiate_user
-)
-from user_saver_class import (
-    UserSaver,
-    test_csv_name,
-    
-)
+import user
+import user_constants
+import user_saver
 
 
 ##########
@@ -36,10 +28,21 @@ def test_csv_headers():
     """
     Test if UserSaver.get_csv_headers() functions correctly.
     """
-    jai = instantiate_user()
-    keys = UserSaver.get_csv_headers(jai)
+    jai = user.instantiate_user()
+    keys = user_saver.UserSaver.get_csv_headers(jai)
+
     print(keys)
 
+
+def test_write_user_info():
+    """
+    Test if UserSaver writes user info correctly.
+    """
+    jai = user.instantiate_user()
+    users = [jai]
+
+    user_saver.UserSaver.write_users_to_csv(users)
+    
 
 ##########
 # Main
@@ -47,10 +50,12 @@ def test_csv_headers():
 
 
 
-
-
 def main():
+    """
+    Run module unit tests.
+    """
     test_csv_headers()
+    test_write_user_info()
 
 
 if __name__ == "__main__":
