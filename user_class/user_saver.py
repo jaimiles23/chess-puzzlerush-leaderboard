@@ -104,7 +104,7 @@ class UserSaver(UserConstants):
             keys = []
             for k, v in user_var.items():
                 
-                if isinstance(v, (str, int, float)):
+                if isinstance(v, (str, int, float, None)):
                     # if value, add key.
                     keys.append(k)
                 
