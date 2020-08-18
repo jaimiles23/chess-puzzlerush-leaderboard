@@ -2,10 +2,11 @@
  * @author [Jai Miles]
  * @email [jaimiles23@gmail.com]
  * @create date 2020-08-16 20:23:46
- * @modify date 2020-08-17 17:40:00
+ * @modify date 2020-08-18 15:24:10
  * @desc [
     Parent user class that contains constants to reference.
 
+    
  ]
  */
 """
