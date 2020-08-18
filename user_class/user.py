@@ -231,7 +231,7 @@ class User(UserConstants):
 
         ## Init args
         self.username = username
-        self.score = score
+        self.score = str(score)
 
         ## webpages & json
         self.user_url = User.user_url.format(self.username)
@@ -270,10 +270,10 @@ class User(UserConstants):
 
 
     def set_attrinfo(self, attrinfo_list: AttrInfoList) -> None:
-        """Sets self.attr for each attr, stat in list.
+        """Sets self.attr for each attr, info in list.
         """
-        for attr, stat in attrinfo_list:
-            setattr(self, attr, stat)
+        for attr, info in attrinfo_list:
+            setattr(self, attr, str(info))
         
         return
 
