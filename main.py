@@ -19,14 +19,7 @@
 # Imports
 ##########
 
-import time
-
-
-import bs4
-from datetime import datetime
-import json
-import requests
-from selenium import webdriver
+import logging
 
 
 from scraping.puzzlerush_leaderboard import LeaderboardScraper
@@ -35,23 +28,30 @@ from user_class.user_saver import UserSaver
 
 
 ##########
+# Logging
+##########
+
+logger = logging.getLogger(__name__ + "main")
+
+
+##########
 # Main Scripts
 ##########
 
 def main():
     
-    ## Get leaderboard usernames & scores
+    logging.info("1.  Webscraping")
     usernames_scores = LeaderboardScraper.get_usernames_scores()
 
-    ## Create user profiles
+    logging.info("2.  Create user profiles")
     user_profiles = []
     for username, score in usernames_scores:
         user_profiles.append( User(username, score))
 
-    ## Save user information
+    logging.info("3.  Save user profiles")
     UserSaver.write_users_to_csv(user_profiles)
 
- 
+
 
 ##########
 # main == name
