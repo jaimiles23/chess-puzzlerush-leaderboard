@@ -22,11 +22,11 @@ from typing import Union, Any
 
 ## NOTE: Could also use if name == main for import statements..?
 try:
-    from user_class.create_user_class import User
+    from user_class.user import User
     from user_class.user_constants import UserConstants
 
 except: 
-    from create_user_class import User
+    from user import User
     from user_constants import UserConstants
 
 
@@ -58,10 +58,12 @@ class UserSaver(UserConstants):
         csv_file_name = UserSaver.get_csv_file_name()
 
         with open(csv_file_name, 'w') as f:
-            
-            for u in Users:
-                ## TODO: get values for each user.
-                f.write(u)
+
+            for User in Users:
+                user_info = UserSaver.get_user_info(User)
+                f.write(user_info)
+        
+        return
 
 
     @staticmethod
@@ -89,7 +91,7 @@ class UserSaver(UserConstants):
     def get_csv_headers( user_obj: object) -> list:
         """Returns list of variables for csv headers."""
         return vars(user_obj)
-        
+
 
     ##########
     # User Methods
@@ -103,7 +105,7 @@ class UserSaver(UserConstants):
         for var in vars(user_obj):
             user_info.append( getattr(user_obj, var))
         return user_info
-            
+
 
 ##########
 # Main
