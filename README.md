@@ -40,13 +40,13 @@ There are 5 steps in this data pipeline:
 
 
 ## TODO:
-1. Fix user class to include all attr even if not included in dict.
-2. Implement remote Selenium
-3. Research online databases to save to
+
+1. Implement remote Selenium
+2. Research online databases to save to
    1. potentially Lambda & DynamoDB...
-4. Deploy script online to run every X minutes 
+3. Deploy script online to run every X minutes 
    1. 1? 3? 5?
-5. Test data collected & stored as intended
-6. Research dashboard stuff...
+4. Test data collected & stored as intended
+5. Research dashboard stuff...
 
 
