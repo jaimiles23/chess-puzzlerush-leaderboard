@@ -73,7 +73,8 @@ class UserSaver(UserConstants):
             for User in Users:
                 logger.debug(f"User: {User.username}")
                 user_info = UserSaver.get_user_info(User)
-
+                
+                print(user_info)
                 f.write(user_info)
                 f.write('\n')
         
