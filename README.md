@@ -40,14 +40,13 @@ There are 5 steps in this data pipeline:
 
 
 ## TODO:
-1. Re-structure clean user attribute functions (datetimes, location non commas)
-2. Modulate scraping module.
-3. Implement remote Selenium
-4. Research online databases to save to
+1. Fix user class to include all attr even if not included in dict.
+2. Implement remote Selenium
+3. Research online databases to save to
    1. potentially Lambda & DynamoDB...
-5. Deploy script online to run every X minutes 
+4. Deploy script online to run every X minutes 
    1. 1? 3? 5?
-6. Test data collected & stored as intended
-7. Research dashboard stuff...
+5. Test data collected & stored as intended
+6. Research dashboard stuff...
 
 
