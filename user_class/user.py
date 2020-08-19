@@ -350,7 +350,7 @@ class User(UserConstants):
         """
         location = getattr(self, 'location')
         location = location.replace(',', '')
-        location = location.encode('utf-8').strip()
+        # location = location.encode('utf-8').strip()
         self.location = location
 
 

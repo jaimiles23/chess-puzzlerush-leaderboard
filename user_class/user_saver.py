@@ -63,11 +63,11 @@ class UserSaver(UserConstants):
         csv_file_name = UserSaver.get_csv_file_name()
         logger.debug(f"{'#' * 5} Logging to: {csv_file_name}")
 
-        with open(csv_file_name, 'w') as f:
+        with open(csv_file_name, 'wb') as f:
             ## CSV Headers
             csv_headers = UserSaver.get_csv_headers( Users[0])
             f.write(csv_headers)
-            f.write('\n')
+            f.write('\n'.encode('utf-8'))
 
             ## User Info
             for User in Users:
@@ -76,7 +76,7 @@ class UserSaver(UserConstants):
                 
                 print(user_info)
                 f.write(user_info)
-                f.write('\n')
+                f.write('\n'.encode('utf-8'))
         
         logger.info(f"{'#' * 5} Logged users to: {csv_file_name}")
         return
@@ -119,7 +119,7 @@ class UserSaver(UserConstants):
     @staticmethod
     def get_csv_headers( user_obj: object) -> str:
         """Returns str of variables for csv headers."""
-        return ','.join(vars(user_obj))
+        return u','.join(vars(user_obj)).encode('utf-8').strip()
 
 
     ##########
@@ -134,7 +134,7 @@ class UserSaver(UserConstants):
         for var in vars(user_obj):
             user_info.append( getattr(user_obj, var))
 
-        return ','.join(user_info)
+        return u','.join(user_info).encode('utf-8').strip()
 
 
 
