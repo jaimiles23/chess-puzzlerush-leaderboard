@@ -131,7 +131,7 @@ class User(UserConstants):
                     logger.info(f"{e} \n\n {key}, {nested_key}")
                 
                 finally:
-                    value = value if value else "NA"
+                    value = value if value else ''
                     attr_info_list.append( (new_key, value))
         
         return attr_info_list
@@ -363,11 +363,11 @@ class User(UserConstants):
 
         def _get_datetime_str(timestamp: int) -> str:
             """Auxiliary method to return datetime string from timestamp."""
-            if timestamp == 'NA':         # attrInfo records as string to record to CSV.
+            if not timestamp:         # attrInfo records as string to record to CSV.
                 return timestamp
             
             datetime_obj = datetime.fromtimestamp( int(timestamp))
-            return datetime_obj.strftime("%Y.%m.%d")
+            return datetime_obj.strftime("%Y/%m/%d")
 
 
         ## Convert joined
