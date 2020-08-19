@@ -133,6 +133,7 @@ class LeaderboardScraper():
             entry = ( usernames[i].text, scores[i].text)
             usernames_scores.append(entry)
 
+        driver.quit()
         return usernames_scores
 
 
