@@ -35,7 +35,6 @@ from user_class.user_saver import UserSaver
 logger = logging.getLogger(__name__ + "main")
 
 
-
 ##########
 # Main Scripts
 ##########
