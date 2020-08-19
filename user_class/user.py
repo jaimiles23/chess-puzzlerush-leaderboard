@@ -129,6 +129,9 @@ class User(UserConstants):
                     value = None
                     logger.info(f"{e} \n\n {key}, {nested_key_tuple}, {nested_key}")
 
+                # NOTE: None isn't recorded as user object - user profile will be missing attribute.
+                # Because writing to csv, need all fields to be included.
+                value = value if value else "NA"        
                 new_key = '_'.join([mode, key, nested_key])
                 attr_info_list.append( (new_key, value))
         
@@ -338,15 +341,17 @@ class User(UserConstants):
 
     ########## Location
     def clean_location(self) -> None:
-        """Removes commas from User.location attribute.
+        """Removes commas from User.location attribute and encodes in utf8.
 
         If there are commas, displaces csv format.
         e.g., La Jolla, California.
-        """
-        if not self.location:
-            return
-        self.location = self.location.replace(",", "")
 
+        Not all locations are in ascii range(128). Thus, encode into utf8
+        """
+        location = self.location
+        location = location.replace(',', '')
+        location = location.encode('utf-8').strip()
+        self.location = location
 
 
     ########## Datetime
@@ -359,7 +364,7 @@ class User(UserConstants):
 
         def _get_datetime_str(timestamp: int) -> str:
             """Auxiliary method to return datetime string from timestamp."""
-            if timestamp == 'None':         # attrInfo records as string to record to CSV.
+            if timestamp == 'NA':         # attrInfo records as string to record to CSV.
                 return timestamp
             
             datetime_obj = datetime.fromtimestamp( int(timestamp))
@@ -407,16 +412,23 @@ class User(UserConstants):
     # View profile 
     ##########
 
-    def view_profile(self) -> None:
+    def view_profile(self, full: bool = False) -> None:
         """Prints attributes from the player profile for viewing."""
-        items = (
-            self.username, 
-            self.score, 
-            self.user_info['country'], 
-            # self.user_info['location'],
-            # self.bullet,
-        )
-        print(items, sep = "\t")
+        if full:
+            for v in vars(self):
+                print(v, getattr(self, v))
+
+        else:
+            items = (
+                self.username, 
+                self.score, 
+                self.user_info['country'], 
+                # self.user_info['location'],
+                # self.bullet,
+            )
+            print(items, sep = "\t")
+        
+        print("\n")
 
 
 ##########
@@ -433,12 +445,7 @@ def instantiate_user():
 
 def test_user_class(jai):
 
-    print("\n\n", "#" * 10, "Player Variables", "#" * 10, "\n\n")
-
-    # jai.view_profile()
-    for v in vars(jai):
-        print(v, getattr(jai, v))
-
+    jai.view_profile(full = True)
     return
 
 
