@@ -66,16 +66,22 @@ class User(UserConstants):
 
     ########## Methods
     @classmethod
-    def add_user(cls):
+    def add_user(cls, user_name: str):
         """Increments user count."""
         cls.user_count += 1
-        logger.debug(f"User # {User.user_count}")
+        logger.debug(f"User # {User.user_count}: {user_name}")
     
 
     @classmethod
     def print_num_users(cls):
         """Prints number of users."""
         print(cls.user_count)
+    
+
+    @classmethod
+    def reset_num_users(cls):
+        """Resets the number of users."""
+        cls.user_count = 0
     
 
     ##########
@@ -128,7 +134,7 @@ class User(UserConstants):
                 
                 except (KeyError, AttributeError) as e:
                     value = None
-                    logger.info(f"{e} \n\n {key}, {nested_key}")
+                    logger.debug(f"\t{e}: {key}, {nested_key}")
                 
                 finally:
                     value = value if value else ''
@@ -209,7 +215,7 @@ class User(UserConstants):
         self.convert_timestamp_attrs()
 
         ## increment user
-        User.add_user()
+        User.add_user( self.user_name)
 
         ## clean user attr
 
@@ -273,6 +279,7 @@ class User(UserConstants):
 
         for key in User.keys_info:
             value = self.user_info_dict.get(key, None)
+            value = value if value else ''
             user_info_attrinfo_list.append( (key, value))
 
         return user_info_attrinfo_list
@@ -347,10 +354,8 @@ class User(UserConstants):
 
         Not all locations are in ascii range(128). Thus, encode into utf8
         """
-        location = getattr(self, 'location')
-        location = location.replace(',', '')
-        # location = location.encode('utf-8').strip()
-        self.location = location
+        self.location = self.location.replace(',', '')
+        return
 
 
     ########## Datetime
@@ -421,8 +426,7 @@ class User(UserConstants):
             items = (
                 self.username, 
                 self.score, 
-                self.user_info['country'], 
-                # self.user_info['location'],
+                self.country, 
                 # self.bullet,
             )
             print(items, sep = "\t")
