@@ -6,6 +6,7 @@
  * @desc [
     Main script to find chess.com ratings for user profiles.
 
+    Steps:
         1. Imports
         2. Webscrape puzzle rush leaderboard
         3. Create user profiles with stats
@@ -48,13 +49,29 @@ def main():
     for username, score in usernames_scores:
         user_profiles.append( User(username, score))
 
+
+    ## Determine which vars are NOT included in user attributes.
+    ## 
+    attr_dict = dict()
     for profile in user_profiles:
         profile.view_profile(full=True)
 
+        for v in vars(profile):
+            if v not in attr_dict.keys():
+                attr_dict[v] = 1
+            else:
+                attr_dict[v] = attr_dict[v] + 1
+
+
+    ## print dict w/ counts
+    for k, v in attr_dict.items():
+        print(k, v, sep = "\t")
+    
+    
+
+
     logging.info("3.  Save user profiles")
     UserSaver.write_users_to_csv(user_profiles)
-
-
 
 
 ##########
