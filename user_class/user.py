@@ -348,7 +348,7 @@ class User(UserConstants):
 
         Not all locations are in ascii range(128). Thus, encode into utf8
         """
-        location = self.location
+        location = getattr(self, 'location')
         location = location.replace(',', '')
         location = location.encode('utf-8').strip()
         self.location = location
