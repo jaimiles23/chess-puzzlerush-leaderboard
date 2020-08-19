@@ -18,6 +18,7 @@ import logging
 
 logger = logging.getLogger(__name__ + "user_class")
 logger.setLevel(10)
+
 """
 NOTE: 
 before commenting, this worked. Check if logger comes AFTER commenting.
