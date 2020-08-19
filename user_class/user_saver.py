@@ -2,7 +2,7 @@
  * @author [Jai Miles]
  * @email [jaimiles23@gmail.com]
  * @create date 2020-08-16 17:40:01
- * @modify date 2020-08-17 18:24:40
+ * @modify date 2020-08-18 17:31:04
  * @desc [
     Class to save user profiles to csv.
  ]
@@ -41,7 +41,6 @@ class UserSaver(UserConstants):
     """
     Class with auxiliary methods to save user profiles.
     """
-    
 
     ##########
     # Class Constants
@@ -75,7 +74,6 @@ class UserSaver(UserConstants):
                 logger.debug(f"User: {User.username}")
                 user_info = UserSaver.get_user_info(User)
                 
-                print(user_info)
                 f.write(user_info)
                 f.write( UserSaver.utf_new_line)
         
@@ -93,7 +91,7 @@ class UserSaver(UserConstants):
         if not os.path.exists(UserSaver.directory):
             os.makedirs(UserSaver.directory)
         return
-    
+
 
     ##########
     # CSV Methods
@@ -136,7 +134,6 @@ class UserSaver(UserConstants):
             user_info.append( getattr(user_obj, var))
 
         return u','.join(user_info).encode('utf-8').strip()
-
 
 
 ##########

@@ -416,7 +416,7 @@ class User(UserConstants):
         """Prints attributes from the player profile for viewing."""
         if full:
             for v in vars(self):
-                print(v, getattr(self, v))
+                print(v, '-', getattr(self, v))
 
         else:
             items = (
