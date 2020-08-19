@@ -52,7 +52,6 @@ AttrInfoList = List[AttrInfo]
 KeyTuple = Tuple[str, tuple]            # Dict key structure for API
 
 
-
 ##########
 # User object
 ##########
@@ -111,29 +110,29 @@ class User(UserConstants):
         AttrsInfo[1] represents the user's info
     """
     @staticmethod
-    def get_attrinfolist(top_dict: dict, key_tuple: tuple, mode: str) -> AttrInfoList:
+    def get_attrinfolist(user_stat_dict: dict, key_tuple: KeyTuple, mode: str) -> AttrInfoList:
         """Returns list of (attr, info) from top_dict which are specified in the key_tuple.
 
         NOTE: Consider more flexible solutions - recursion/iteration
         """
+        mode_dict = user_stat_dict.get(mode, None)
         attr_info_list = list()
 
         for key, nested_key_tuple in key_tuple:
             for nested_key in nested_key_tuple:
+                new_key = '_'.join([mode, key, nested_key])
                 
                 try:
-                    nested_dict = top_dict.get(key, None)
+                    nested_dict = mode_dict.get(key, None)
                     value = nested_dict.get(nested_key, None)
-
+                
                 except (KeyError, AttributeError) as e:
                     value = None
-                    logger.info(f"{e} \n\n {key}, {nested_key_tuple}, {nested_key}")
-
-                # NOTE: None isn't recorded as user object - user profile will be missing attribute.
-                # Because writing to csv, need all fields to be included.
-                value = value if value else "NA"        
-                new_key = '_'.join([mode, key, nested_key])
-                attr_info_list.append( (new_key, value))
+                    logger.info(f"{e} \n\n {key}, {nested_key}")
+                
+                finally:
+                    value = value if value else "NA"
+                    attr_info_list.append( (new_key, value))
         
         return attr_info_list
 
@@ -142,7 +141,7 @@ class User(UserConstants):
     def get_mode_attrinfolist(
         user_stat_dict: dict,
         modes: tuple, 
-        dict_key_structure: KeyTuple
+        key_tuple: KeyTuple
         ) -> AttrInfoList:
         """Returns user's list of AttrInfoList for each mode.
 
@@ -154,11 +153,11 @@ class User(UserConstants):
         attr_info_list = []
         
         for mode in modes:
-            mode_dict = user_stat_dict.get(mode, None)
-            if not mode_dict:       # User hasn't played mode.
-                continue
-
-            attr_info = User.get_attrinfolist(mode_dict, dict_key_structure, mode)
+            attr_info = User.get_attrinfolist(
+                user_stat_dict = user_stat_dict,
+                key_tuple = key_tuple, 
+                mode = mode
+            )
             attr_info_list.append(attr_info)
         
         return attr_info_list
@@ -436,11 +435,15 @@ class User(UserConstants):
 ##########
 
 def instantiate_user():
-    username = "jaimiles23"
+    # username = "jaimiles23"
+    username = "kawaiikoto"
+    """
+    kawaiikoto has no lessons, rapid, or bullet stats.
+    """
     score = 23
 
-    jai = User(username, score)
-    return jai
+    test_user = User(username, score)
+    return test_user
 
 
 def test_user_class(jai):
