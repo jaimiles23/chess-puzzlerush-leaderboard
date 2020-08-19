@@ -100,8 +100,6 @@ class UserSaver(UserConstants):
     @staticmethod
     def get_csv_file_name() -> str:
         """Returns name for csv file.
-        
-        NOTE: need to format digits HH, MM, SS
         """
         return (
             UserSaver.directory + 
