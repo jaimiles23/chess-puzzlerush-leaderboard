@@ -61,7 +61,7 @@ class UserSaver(UserConstants):
         """
         UserSaver.mkdir_if_needed()
         csv_file_name = UserSaver.get_csv_file_name()
-        logger.debug(f"{'#' * 5} Logging to: {csv_file_name}")
+        logger.debug(f"\n{'#' * 5} Logging to: {csv_file_name}")
 
         with open(csv_file_name, 'wb') as f:
             ## CSV Headers
@@ -77,7 +77,7 @@ class UserSaver(UserConstants):
                 f.write(user_info)
                 f.write( UserSaver.utf_new_line)
         
-        logger.info(f"{'#' * 5} Logged users to: {csv_file_name}")
+        logger.info(f"\n{'#' * 5} Logged users to: {csv_file_name}")
         return
 
 
