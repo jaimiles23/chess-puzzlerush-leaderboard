@@ -77,7 +77,7 @@ class UserSaver(UserConstants):
                 
                 print(user_info)
                 f.write(user_info)
-                f.write('\n'.encode('utf-8'))
+                f.write( UserSaver.utf_new_line)
         
         logger.info(f"{'#' * 5} Logged users to: {csv_file_name}")
         return
