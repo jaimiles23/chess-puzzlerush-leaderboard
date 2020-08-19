@@ -41,6 +41,7 @@ class UserSaver(UserConstants):
     """
     Class with auxiliary methods to save user profiles.
     """
+    
 
     ##########
     # Class Constants
@@ -67,7 +68,7 @@ class UserSaver(UserConstants):
             ## CSV Headers
             csv_headers = UserSaver.get_csv_headers( Users[0])
             f.write(csv_headers)
-            f.write('\n'.encode('utf-8'))
+            f.write( UserSaver.utf_new_line)
 
             ## User Info
             for User in Users:

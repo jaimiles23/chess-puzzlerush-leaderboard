@@ -36,6 +36,13 @@ class UserConstants(object):
     """
 
     ##########
+    # Constants
+    ##########
+
+    utf_new_line = '\n'.encode('utf-8')
+
+
+    ##########
     # API URLs
     ##########
 
