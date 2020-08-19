@@ -14,6 +14,11 @@
 # Imports
 ##########
 
-from user_class.user import User
-from user_class.user_saver import UserSaver
 
+try:
+    from user_class.user import User
+    from user_class.user_saver import UserSaver
+    
+except:
+    from user import User
+    from user_saver import UserSaver

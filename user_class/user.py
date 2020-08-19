@@ -34,12 +34,12 @@ from typing import Tuple, Union, List
 
 
 try:
-    from user_class.user_constants import UserConstants
-    from user_class.logger import logger
+    from .user_constants import UserConstants
+    from .logger import logger
 
 except:
-    from user_constants import UserConstants
-    from logger import logger
+    from user_class.user_constants import UserConstants
+    from user_class.logger import logger
 
 
 ##########

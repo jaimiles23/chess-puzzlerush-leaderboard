@@ -23,9 +23,9 @@
 import logging
 import time
 
-from scraping.puzzlerush_leaderboard import LeaderboardScraper
-from user_class.user import User
-from user_class.user_saver import UserSaver
+from scraping import LeaderboardScraper
+from user_class import User
+from user_class import UserSaver
 
 
 ##########
@@ -33,6 +33,7 @@ from user_class.user_saver import UserSaver
 ##########
 
 logger = logging.getLogger(__name__ + "main")
+logger.setLevel(10)
 
 
 ##########

@@ -17,3 +17,4 @@
 import logging
 
 logger = logging.getLogger(__name__ + "scraping")
+logger.setLevel(10)
