@@ -21,7 +21,7 @@
 ##########
 
 import logging
-
+import time
 
 from scraping.puzzlerush_leaderboard import LeaderboardScraper
 from user_class.user import User
@@ -61,5 +61,10 @@ def main():
 ##########
 
 if __name__ == "__main__":
-    main()
+    runs = 20
+    minutes_between_runs = 5
+
+    for i in range(runs):
+        main()
+        time.sleep(minutes_between_runs * 60)
 
