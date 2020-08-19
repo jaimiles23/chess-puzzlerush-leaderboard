@@ -6,11 +6,11 @@
  * @desc [
     Main script to find chess.com ratings for user profiles.
 
-    1. Imports
-    2. Webscrape puzzle rush leaderboard
-    3. Create user profiles with stats
-    4. Convert user profiles to be saved
-    5. Write to csv
+        1. Imports
+        2. Webscrape puzzle rush leaderboard
+        3. Create user profiles with stats
+        4. Convert user profiles to be saved
+        5. Write to csv
  ]
  */
 """
@@ -48,8 +48,12 @@ def main():
     for username, score in usernames_scores:
         user_profiles.append( User(username, score))
 
+    for profile in user_profiles:
+        profile.view_profile(full=True)
+
     logging.info("3.  Save user profiles")
     UserSaver.write_users_to_csv(user_profiles)
+
 
 
 
