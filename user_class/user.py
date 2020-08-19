@@ -137,7 +137,7 @@ class User(UserConstants):
                     logger.debug(f"\t{e}: {key}, {nested_key}")
                 
                 finally:
-                    value = value if value else ''
+                    value = value if (value is not None) else ''
                     attr_info_list.append( (new_key, value))
         
         return attr_info_list
@@ -279,7 +279,7 @@ class User(UserConstants):
 
         for key in User.keys_info:
             value = self.user_info_dict.get(key, None)
-            value = value if value else ''
+            value = value if (value is not None) else ''
             user_info_attrinfo_list.append( (key, value))
 
         return user_info_attrinfo_list
