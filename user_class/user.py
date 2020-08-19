@@ -237,7 +237,7 @@ class User(UserConstants):
     # AttrInfo methods
     ##########
 
-    ########## Helper methods
+    ########## Set AttrInfo Helper methods
     """
     Helper methods to set user instance attributes from AttrInfoList.
     """
