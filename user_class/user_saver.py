@@ -46,8 +46,8 @@ class UserSaver(UserConstants):
     # Class Constants
     ##########
 
-    directory = "puzzlerush_csvs"
-    csv_file_name = directory + "\\{}.{}.{}_{}.{}.{}_puzzlerush_leaderboard.csv"
+    directory = "puzzlerush_csvs\\"
+    csv_time_format = "%Y.%m.%d_%H.%M.%S_puzzlerush_leaderboard.csv"
 
 
     ##########
@@ -103,15 +103,9 @@ class UserSaver(UserConstants):
         
         NOTE: need to format digits HH, MM, SS
         """
-        now_obj = datetime.now()
-                
-        return UserSaver.csv_file_name.format(
-            now_obj.year,
-            now_obj.month,
-            now_obj.day,
-            now_obj.hour,
-            now_obj.minute,
-            now_obj.second
+        return (
+            UserSaver.directory + 
+            datetime.now().strftime(UserSaver.csv_time_format)
         )
 
 
