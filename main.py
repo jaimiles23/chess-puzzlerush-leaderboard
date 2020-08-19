@@ -54,6 +54,7 @@ def main():
 
     logging.info("3.  Save user profiles")
     UserSaver.write_users_to_csv(user_profiles)
+    User.reset_num_users()
 
 
 ##########
@@ -66,5 +67,6 @@ if __name__ == "__main__":
 
     for i in range(runs):
         main()
+        logger.info(f"\n\n Completed run {i + 1}. sleeping for {minutes_between_runs} minutes...")
         time.sleep(minutes_between_runs * 60)
 
