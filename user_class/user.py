@@ -215,7 +215,7 @@ class User(UserConstants):
         self.convert_timestamp_attrs()
 
         ## increment user
-        User.add_user( self.user_name)
+        User.add_user( self.username)
 
         ## clean user attr
 
@@ -423,13 +423,13 @@ class User(UserConstants):
                 print(v, '-', getattr(self, v))
 
         else:
-            items = (
-                self.username, 
-                self.score, 
-                self.country, 
-                # self.bullet,
-            )
-            print(items, sep = "\t")
+            attr_list = [
+                "username",
+                "score",
+                "country"
+            ]
+            attr_val_list = [getattr(self, attr) for attr in attr_list]
+            print(attr_val_list, sep = " - ")
         
         print("\n")
 
