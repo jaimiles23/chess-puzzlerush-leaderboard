@@ -16,10 +16,6 @@
    Or save the webpage as a pdf, and then use pdf identifier??
 
    TODO: 
-   
-    Move to remote-webdriver so doesn't have to run from desktop
-    https://selenium-python.readthedocs.io/getting-started.html#selenium-remote-webdriver
-
     Try using requests-html instead
     https://requests.readthedocs.io/projects/requests-html/en/latest/#javascript-support
  
@@ -38,10 +34,14 @@ import time
 
 
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from typing import Tuple, List
 
 
-from scraping.logger import logger
+try:
+    from scraping.logger import logger
+except:
+    from logger import logger
 
 
 
@@ -94,11 +94,25 @@ class LeaderboardScraper():
             raise Exception("Could not locate elements!")
 
 
-        ##### Driver
-        driver = webdriver.Firefox()
-        driver.get(LeaderboardScraper.webpage)
+        def get_driver() -> object:
+            """Returns Selenium driver object.
+
+            NOTE: If running the remote driver, need to create standalone server. 
+            Run the following command on cmd
+                >>> java -jar selenium-server-standalone-3.141.0.jar -port 4446
+            """
+            ## Desktop
+            # driver = webdriver.Firefox()
+
+            ## Remote server
+            driver = webdriver.Remote(
+                command_executor='http://127.0.0.1:4446/wd/hub',
+                desired_capabilities=DesiredCapabilities.FIREFOX)
+            driver.get(LeaderboardScraper.webpage)
+            return driver
 
 
+        driver = get_driver()
         ##### User name
         username_class = "user-username-component"
         usernames = _get_elements(username_class)
