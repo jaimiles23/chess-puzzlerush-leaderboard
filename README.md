@@ -4,6 +4,7 @@ This repo contains code for a data pipeline to analyze chess.com's [puzzle rush 
 
 
 ## Inspiration 
+> Add explanation on what puzzle rush is
 
 Chess.com's Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to scores as low as 35 on the Global Hourly Leaderboard. The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
 
