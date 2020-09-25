@@ -14,7 +14,7 @@ A data pipeline to analyze Chess.com's [Puzzle Rush Leaderboard](https://www.che
 - [TODO:](#todo)
 
 # About
-Puzzle Rush is a chess.com game challenges players to solve chess puzzles as quickly as possible. The rules are simple:
+Puzzle Rush challenges players to solve chess puzzles as quickly as possible. The rules are simple:
    - Solve as many puzzles as you can in the allotted time,
    - Puzzles get harder the more you solve,
    - Three strikes and you're out!
