@@ -3,6 +3,16 @@
 # Puzzle Rush Leaderboard Data Pipeline
 A data pipeline to analyze Chess.com's [Puzzle Rush Leaderboard](https://www.chess.com/leaderboard/rush?type=hour). 
 
+- [Puzzle Rush Leaderboard Data Pipeline](#puzzle-rush-leaderboard-data-pipeline)
+- [About](#about)
+- [Inspiration](#inspiration)
+- [Data pipeline](#data-pipeline)
+  - [Web scraping](#web-scraping)
+  - [Create user profiles](#create-user-profiles)
+  - [Store data](#store-data)
+  - [Query data](#query-data)
+  - [Analyze & Communicate](#analyze--communicate)
+- [TODO:](#todo)
 
 # About
 Puzzle Rush is a chess.com game challenges players to solve chess puzzles as quickly as possible. The rules are simple:
