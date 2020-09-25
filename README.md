@@ -4,6 +4,7 @@ A data pipeline to analyze Chess.com's [Puzzle Rush Leaderboard](https://www.che
 
 - [About](#about)
 - [Inspiration](#inspiration)
+  - [Purpose](#purpose)
 - [Data pipeline](#data-pipeline)
   - [Web scraping](#web-scraping)
   - [Create user profiles](#create-user-profiles)
@@ -20,11 +21,16 @@ Puzzle Rush is a chess.com game challenges players to solve chess puzzles as qui
 
 
 # Inspiration 
+Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to scores as low as 35 on the Global Hourly Leaderboard. 
+
 My interest in this data pipeline emerged when I accidentally placed 5th on the Puzzle Rush Global Leaderboard.
 
 ![](https://i.imgur.com/A775aii.png)
 
-Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to scores as low as 35 on the Global Hourly Leaderboard. The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
+
+
+## Purpose
+The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
 
 
 # Data pipeline
@@ -56,8 +62,8 @@ WIP
 # TODO:
 _note_ may alternatively like to run the script locally via windows task setter for preliminary implementation.
 
-2. Research online databases to save to
+1. Research online databases to save to
    1. potentially Lambda & DynamoDB...
-3. Deploy script online to run every X minutes 
-4. Test data collected & stored as intended
-5. Research dashboard stuff...
+1. Deploy script online to run every X minutes 
+1. Test data collected & stored as intended
+1. Research dashboard stuff...
