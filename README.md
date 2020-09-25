@@ -1,9 +1,7 @@
-![.](https://imgur.com/a/0FQ9T2Y)
+![](https://i.imgur.com/bhZ9Y7z.png)
 
-# Puzzle Rush Leaderboard Data Pipeline
 A data pipeline to analyze Chess.com's [Puzzle Rush Leaderboard](https://www.chess.com/leaderboard/rush?type=hour). 
 
-- [Puzzle Rush Leaderboard Data Pipeline](#puzzle-rush-leaderboard-data-pipeline)
 - [About](#about)
 - [Inspiration](#inspiration)
 - [Data pipeline](#data-pipeline)
@@ -24,7 +22,7 @@ Puzzle Rush is a chess.com game challenges players to solve chess puzzles as qui
 # Inspiration 
 My interest in this data pipeline emerged when I accidentally placed 5th on the Puzzle Rush Global Leaderboard.
 
-![.](https://imgur.com/a/OkvYnfu)
+![](https://i.imgur.com/A775aii.png)
 
 Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to scores as low as 35 on the Global Hourly Leaderboard. The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
 
