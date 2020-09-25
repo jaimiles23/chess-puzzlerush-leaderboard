@@ -3,8 +3,8 @@
 A data pipeline to analyze Chess.com's [Puzzle Rush Leaderboard](https://www.chess.com/leaderboard/rush?type=hour). 
 
 - [About](#about)
-- [Inspiration](#inspiration)
 - [Purpose](#purpose)
+- [Inspiration](#inspiration)
 - [Data pipeline](#data-pipeline)
   - [Web scraping](#web-scraping)
   - [Create user profiles](#create-user-profiles)
@@ -20,17 +20,19 @@ Puzzle Rush is a chess.com game challenges players to solve chess puzzles as qui
    - Three strikes and you're out!
 
 
+# Purpose
+The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
+
+
 # Inspiration 
 Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to scores as low as 35 on the Global Hourly Leaderboard. 
 
-My interest in this data pipeline emerged when I accidentally placed 5th on the Puzzle Rush Global Leaderboard.
+My interest in this data pipeline emerged when I accidentally placed 5th on the Puzzle Rush Global Leaderboard. Now, I am interested to place in the top 3 on the Global Leaderboard.
 
 ![](https://i.imgur.com/A775aii.png)
 
 
 
-# Purpose
-The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
 
 
 # Data pipeline
