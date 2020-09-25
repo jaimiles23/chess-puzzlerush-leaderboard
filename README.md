@@ -4,7 +4,7 @@ A data pipeline to analyze Chess.com's [Puzzle Rush Leaderboard](https://www.che
 
 - [About](#about)
 - [Inspiration](#inspiration)
-  - [Purpose](#purpose)
+- [Purpose](#purpose)
 - [Data pipeline](#data-pipeline)
   - [Web scraping](#web-scraping)
   - [Create user profiles](#create-user-profiles)
@@ -29,7 +29,7 @@ My interest in this data pipeline emerged when I accidentally placed 5th on the 
 
 
 
-## Purpose
+# Purpose
 The purpose of this data pipeline is to determine the best time to play Puzzle Rush to place #1 on the Global Hourly Leaderboard.
 
 
