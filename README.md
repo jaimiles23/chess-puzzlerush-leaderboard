@@ -23,7 +23,7 @@ Puzzle Rush challenges players to solve chess puzzles as quickly as possible. Th
    - Puzzles get harder the more you solve,
    - Three strikes and you're out!
 
-The Global Hourly Leaderboard tracks the top Puzzle Rush scores in the last 60 minutes. The top ranking varies tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to scores as low as 35. The variation is likely because player activity differences due to timezones.
+The Global Hourly Leaderboard tracks the top Puzzle Rush scores in the last 60 minutes. The top ranking varies tremendously over time; ranging from an all-time high of [91](https://www.chess.com/member/spicycaterpillar) to more attainable scores like 35. The variation is likely because of time zones influencing differences in player activity.
 
 My interest in this data pipeline emerged when I accidentally placed 5th on the Puzzle Rush Global Leaderboard.
 
