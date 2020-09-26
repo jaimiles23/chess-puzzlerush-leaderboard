@@ -49,7 +49,7 @@ There are 5 steps in this data pipeline:
 
 
 ## Web scraping
-LeaderboardScraper class uses selenium to retrieve usernames and scores from chess.com. Cleans data and returns a list of tuples containing the username and their puzzle rush score.
+THe `LeaderboardScraper` class stores web-scraping methods. It uses Selenium to retrieve usernames and scores from chess.com, cleans the data, and returns a list of tuples containing the username and their puzzle rush score.
 
 
 ## Create user profiles
