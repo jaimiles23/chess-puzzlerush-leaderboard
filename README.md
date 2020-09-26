@@ -29,7 +29,7 @@ Puzzlerush leaderboard ratings vary tremendously over time; ranging from an all-
 
 My interest in this data pipeline emerged when I accidentally placed 5th on the Puzzle Rush Global Leaderboard. Now, I am interested to place in the top 3 on the Global Leaderboard.
 
-![](https://i.imgur.com/A775aii.png)
+![](https://i.imgur.com/3wMZI6N.png)
 
 
 
