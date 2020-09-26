@@ -34,13 +34,19 @@ This data pipeline is intended to analyze the Puzzle Rush Hourly Leaderboard and
 
 # Data pipeline
 There are 5 steps in this data pipeline:
-   1. Web scraping: retrieve the users and ratings on the global hourly leaderboard.
-   2. Create user profiles: Connect to chess.com's API and retrieve user information for fun, exploratory data analysis.
-   3. Store data: store the data in an online database.
-   4. Query data: query the data from the online database.
-   5. Analyze & Communicate: analyze the data and display results on an interactive(?) dashboard.
+   1. **Web scraping**
+      1. Retrieve the users and ratings on the global hourly leaderboard.
+   2. **Create user profiles**
+      1. Connect to chess.com's API and retrieve user information for fun, exploratory data analysis.
+   3. **Store data**
+      1. Store the data in an online database.
+   4. **Query data**
+      1. Query the data from the online database.
+   5. **Analyze & Communicate**
+      1. Analyze the data and display results on an interactive(?) dashboard.
 
 > TODO: - Create data pipeline graphic w/ pictures of technologies used.
+
 
 ## Web scraping
 LeaderboardScraper class uses selenium to retrieve usernames and scores from chess.com. Cleans data and returns a list of tuples containing the username and their puzzle rush score.
