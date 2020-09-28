@@ -49,21 +49,21 @@ There are 5 steps in this data pipeline:
 
 
 ## Web scraping
-THe `LeaderboardScraper` class stores web-scraping methods. It uses Selenium to retrieve usernames and scores from chess.com, cleans the data, and returns a list of tuples containing the username and their puzzle rush score.
+The `LeaderboardScraper` class contains methods for web-scraping. Methods use Selenium to retrieve usernames and scores from the leaderboard, clean the data, and return a list of tuples containing the username and their puzzle rush score.
 
 
 ## Create user profiles
-Creates User classes for each username on Leaderboard. The `User` class creates a User object with information on the user's account via the chess.com API. The `UserSaver` class writes player profiles to a csv file.
+Instantiates `User` class for each username on Leaderboard. The `User` class creates a User object with information on the user's account via the chess.com API. The `UserSaver` class writes player profiles to a csv file.
 
 
 ## Store data
-WIP
+WIP - store data in online database
 
 ## Query data
-WIP
+WIP - query from online database
 
 ## Analyze & Communicate
-WIP
+WIP - create dashboard showing best time to play
 
 
 # TODO:
@@ -74,3 +74,4 @@ _note_ may alternatively like to run the script locally via windows task setter 
 1. Deploy script online to run every X minutes 
 1. Test data collected & stored as intended
 1. Research dashboard stuff...
+s
