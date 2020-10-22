@@ -69,9 +69,8 @@ WIP - create dashboard showing best time to play
 # TODO:
 _note_ may alternatively like to run the script locally via windows task setter for preliminary implementation.
 
-1. Research online databases to save to
-   1. potentially Lambda & DynamoDB...
-1. Deploy script online to run every X minutes 
-1. Test data collected & stored as intended
-1. Research dashboard stuff...
-s
+- [ ] Research online databases to save to
+  - [ ] potentially Lambda & DynamoDB...
+- [ ] Deploy script online to run every X minutes 
+- [ ] Test data collected & stored as intended
+- [ ] Research dashboard stuff...
