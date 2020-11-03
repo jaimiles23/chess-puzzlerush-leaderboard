@@ -69,6 +69,9 @@ WIP - create dashboard showing best time to play
 # TODO:
 _note_ may alternatively like to run the script locally via windows task setter for preliminary implementation.
 
+- [ ] Refactor code
+  - [ ] Rename dirs to be more descriptive
+  - [ ] Rename modules & classes to reflect PURPOSE, not content, e.g., user_class -> api_info
 - [ ] Research online databases to save to
   - [ ] potentially Lambda & DynamoDB...
 - [ ] Deploy script online to run every X minutes 
