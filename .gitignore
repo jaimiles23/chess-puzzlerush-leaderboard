@@ -1,5 +1,5 @@
 ## Puzzle rush csv from web scraping
-puzzlerush_csvs/*
+# puzzlerush_csvs/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
